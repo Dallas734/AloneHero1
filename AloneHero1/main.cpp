@@ -20,5 +20,7 @@ int main()
         window.display();
     }
 
+    // Hello!
+
     return 0;
 }
