@@ -1,2 +1,2 @@
-﻿LINK : warning LNK4199: параметр /DELAYLOAD:z игнорируется; не найдены операции импорта из z
+﻿  main.cpp
   AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe
