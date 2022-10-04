@@ -1,59 +1,44 @@
 #include "Player.h"
 
-void Player::Update(float time)
-{
-	Move(time);
-}
 
-void Player::Move(float time)
+void Player::Move(float time, String F, double x, double y, double width, double height)
 {
-	double minSpeed = 0.1;
-	double currentFrameX = 0;
-	double currentFrameY = 0;
-	double animationSpeed = 0.05;
+	/*image.loadFromFile("Images/" + F);
+	texture.loadFromImage(image);
+	spriteMove.setTexture(texture);
+	spriteMove.setTextureRect(IntRect(x, y, width, height));*/
+	SetSprite("Run.png", MOVE, x, y, width, height);
 
 	// Анимация
-	if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
+	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
-		SetDirection(LEFT);
-		SetSpeed(minSpeed);
-		currentFrameX += animationSpeed * time;
-		// Переход на новую строку
-		if (currentFrameX > 3)
-		{
-			currentFrameX = 0;
-			currentFrameY++;
-		}
-		if (currentFrameY > 3)
-		{
-			currentFrameX = 0;
-			currentFrameY = 0;
-		}
-		// Вырезаем спрайт
-		this->sprite.setTextureRect(IntRect(45 * int(currentFrameX), 17 * int(currentFrameY), 128, 64));
+		this->currentFrame += 0.01 * time;
+		if (this->currentFrame > 8) this->currentFrame -= 8;
+		this->spriteMove.setTextureRect(IntRect(x * int(this->currentFrame), y, width, height));
+		this->spriteMove.move(0.1 * time, 0);
 	}
 
-	// Перемещение
-	switch (direction)
-	{
-	// Вправо 
-	case 0: 	
-		dx = speed;
-		dy = 0;
-		break;
-	// Влево
-	case 1:
-		dx = -speed;
-		dy = 0;
-		break;
-	}
+	//// Перемещение
+	//switch (direction)
+	//{
+	//// Вправо 
+	//case 0: 	
+	//	dx = speed;
+	//	dy = 0;
+	//	break;
+	//// Влево
+	//case 1:
+	//	dx = -speed;
+	//	dy = 0;
+	//	break;
+	//}
 
-	// Движение
-	x += dx * time;
-	y += dy * time;
+	//// Движение
+	//this->x += dx * time;
+	//this->y += dy * time;
 
-	speed = 0;
-	sprite.setPosition(x, y);
+	//speed = 0;
+	//sprite.setPosition(this->x, this->y);
 }
 
 int Player::Hit(double strength)
@@ -62,9 +47,5 @@ int Player::Hit(double strength)
 }
 
 void Player::Damage(double strength)
-{
-}
-
-void Player::Walk()
 {
 }

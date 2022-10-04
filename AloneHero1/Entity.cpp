@@ -1,16 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(String F, double x, double y, double width, double height)
+Entity::Entity(double x, double y)
 {
-	file = F;
 	this->x = x;
 	this->y = y;
-	this->width = width;
-	this->height = height;
-	image.loadFromFile("Images/" + F);
-	texture.loadFromImage(image);
-	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(width, height, width, height)); // Задаем спрайту один прямоугольник для вывода.
+	this->currentFrame = 0;
 }
 
 void Entity::SetDirection(int direction)
@@ -33,9 +27,36 @@ double Entity::GetSpeed()
 	return this->speed;
 }
 
+void Entity::SetCurrentFrame(int currentFrame)
+{
+	this->currentFrame = currentFrame;
+}
+
+int Entity::GetCurrentFrame()
+{
+	return this->currentFrame;
+}
+
 Sprite Entity::GetSprite()
 {
-	return this->sprite;
+	return this->spriteMove;
+}
+
+void Entity::SetSprite(String directory, Sprites spriteName, double x, double y, double width, double height)
+{
+	switch (spriteName)
+	{
+	case MOVE:
+		image.loadFromFile("Images/" + directory);
+		texture.loadFromImage(image);
+		spriteMove.setTexture(texture);
+		spriteMove.setTextureRect(IntRect(x, y, width, height));
+		break;
+	case DAMAGE:
+		break;
+	case HIT:
+		break;
+	}
 }
 
 Entity::~Entity()

@@ -9,6 +9,13 @@ enum Directions
 	RIGHT = 2
  };
 
+enum Sprites
+{
+	MOVE,
+	HIT,
+	DAMAGE
+};
+
 class Entity
 {
 	protected:
@@ -18,24 +25,27 @@ class Entity
 		double width, height; // Ширина и высота
 		int direction; // Направление движения
 		String file; // Имя файла с расширением
-		Image image; // Изображение
-		Texture texture; // Текстура
-		Sprite sprite; // Спрайт
+		Sprite spriteMove; // Спрайт
+		Image image;
+		Texture texture;
 		int health; // Здоровье
 		double strength; // Сила
+		double currentFrame;
 
 	public:
-		Entity(String F, double x, double y, double width, double height);
-		virtual void Move(float time) = 0;
+		Entity(double x, double y);
+		virtual void Move(float time, String F, double x, double y, double width, double height) = 0;
 		virtual int Hit(double strength) = 0; 
 		virtual void Damage(double strength) = 0;
-		virtual void Walk() = 0;
-		virtual void Update(float time) = 0;
 		void SetDirection(int direction);
 		int GetDirection();
 		void SetSpeed(int speed);
 		double GetSpeed();
+		void SetCurrentFrame(int currentFrame);
+		int GetCurrentFrame();
 		Sprite GetSprite();
+		void SetSprite(String fileName, Sprites spriteName, double x, double y, double width, double height);
+
 		~Entity();
 };
 
