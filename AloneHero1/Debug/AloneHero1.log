@@ -1,2 +1,8 @@
-﻿  main.cpp
+﻿  Player.cpp
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(19,12): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(56,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(56,21): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  main.cpp
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\main.cpp(17,20): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+  Создание кода...
   AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\Debug\AloneHero1.exe
