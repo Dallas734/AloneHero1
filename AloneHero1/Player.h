@@ -10,8 +10,13 @@ class Player : public Entity
 		void Jump();
 		void HelthUP();
 		void StrengthUP();
-		void Move(float time, String F, double x, double y, double width, double height) override;
+		States Update(float time) override;
+		void Move(float time);
 		int Hit(double strength) override;
 		void Damage(double strength) override;
+		void Idle(float time);
+		double GetDX();
+		void SetDX(double dx);
+		
 };
 
