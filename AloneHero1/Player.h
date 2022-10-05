@@ -11,12 +11,9 @@ class Player : public Entity
 		void HelthUP();
 		void StrengthUP();
 		States Update(float time) override;
-		void Move(float time);
+		States Move(float time, Directions direction) override;
 		int Hit(double strength) override;
 		void Damage(double strength) override;
-		void Idle(float time);
-		double GetDX();
-		void SetDX(double dx);
-		
+		States Idle(float time) override;
 };
 

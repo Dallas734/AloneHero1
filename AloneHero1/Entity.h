@@ -3,18 +3,18 @@
 
 using namespace sf;
 
-enum Directions
-{
-	LEFT = 1,
-	RIGHT = 2
- };
-
 enum States
 {
 	RUN,
 	HIT,
 	DAMAGE,
 	IDLE
+};
+
+enum Directions
+{
+	RIGHT,
+	LEFT
 };
 
 class Entity
@@ -26,27 +26,26 @@ class Entity
 		double width, height; // Ширина и высота
 		double currentFrame;
 
-		String file; // Имя файла с расширением
-		Sprite spriteMove; // Спрайт
-		Sprite spriteIdle;
-		Image image;
-		Texture texture;
+		String directory; // Имя директории, где хранятся анимации
+		Sprite spriteMove; // Спрайт движения
+		Sprite spriteIdle; // Спрайт статичного состояния
+		Image image; // Картинка для создания спрайтов
+		Texture texture; // Текстура для создания спрайтов
 		int health; // Здоровье
 		double strength; // Сила
 		
 	public:
 		Entity(double x, double y);
-		virtual States Update(float time) = 0;
-		virtual int Hit(double strength) = 0; 
-		virtual void Damage(double strength) = 0;
-		void SetSpeed(double speed);
-		double GetSpeed();
-		void SetCurrentFrame(int currentFrame);
-		int GetCurrentFrame();
-		Sprite GetSpriteMove();
-		Sprite GetSpriteIdle();
+		~Entity() {};
+		virtual States Update(float time) = 0; // Функция покадрового обновления
+		virtual int Hit(double strength) = 0; // Удар
+		virtual void Damage(double strength) = 0; // Получение урона
+		virtual States Move(float time, Directions direction) = 0; // Движение
+		virtual States Idle(float time) = 0;
+		void SetSpeed(double speed); // Установить скорость
+		double GetSpeed(); // Получить значение скорости
+		Sprite GetSprite(States spriteName); // Возвращает спрайт
 		void SetSprite(String fileName, States spriteName, double x, double y, double width, double height);
 
-		~Entity();
 };
 

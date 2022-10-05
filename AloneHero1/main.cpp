@@ -13,11 +13,10 @@ int main()
     
     while (window.isOpen())
     {
+        // Время для анимации.
         float time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time = time / 800;
-
-        // window.draw(p.GetSpriteIdle());
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -26,10 +25,7 @@ int main()
                 window.close();
         }
         
-        /*p.Idle(time);
-        window.clear();
-        window.draw(p.GetSpriteIdle());*/
-        //p.Move(time);
+        // Состояние для отображения соответствующей анимации.
         States state;
         state = p.Update(time);
 
@@ -37,12 +33,12 @@ int main()
         if (state == RUN)
         {
             window.clear();
-            window.draw(p.GetSpriteMove());
+            window.draw(p.GetSprite(RUN));
         }
         else if (state == IDLE)
         {
             window.clear();
-            window.draw(p.GetSpriteIdle());
+            window.draw(p.GetSprite(IDLE));
         }
         //window.draw(p.GetSpriteIdle());
         window.display();

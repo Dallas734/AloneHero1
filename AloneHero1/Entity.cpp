@@ -7,6 +7,7 @@ Entity::Entity(double x, double y)
 	currentFrame = 0;
 	dx = 0;
 	dy = 0;
+	speed = 0;
 }
 
 void Entity::SetSpeed(double speed)
@@ -19,41 +20,22 @@ double Entity::GetSpeed()
 	return this->speed;
 }
 
-void Entity::SetCurrentFrame(int currentFrame)
+
+Sprite Entity::GetSprite(States spriteName)
 {
-	this->currentFrame = currentFrame;
-}
-
-int Entity::GetCurrentFrame()
-{
-	return this->currentFrame;
-}
-
-Sprite Entity::GetSpriteMove()
-{
-	return this->spriteMove;
-}
-
-Sprite Entity::GetSpriteIdle()
-{
-	return this->spriteIdle;
-}
-
-States Entity::Update(float time)
-{
-	States state = RUN;
-
-	x += dx * time;
-	y += dy * time;
-
-	currentFrame += time * 0.005;
-	if (this->currentFrame > 8) this->currentFrame -= 8;
-	if (dx > 0) spriteMove.setTextureRect(IntRect(160 * int(currentFrame), 0, 160, 111));
-	// if (dx < 0)
-
-	spriteMove.setPosition(x, y);
-
-	return state;
+	switch (spriteName)
+	{
+	case RUN:
+		return spriteMove;
+		break;
+	case DAMAGE:
+		break;
+	case HIT:
+		break;
+	case IDLE:
+		return spriteIdle;
+		break;
+	}
 }
 
 void Entity::SetSprite(String directory, States spriteName, double x, double y, double width, double height)
@@ -75,8 +57,4 @@ void Entity::SetSprite(String directory, States spriteName, double x, double y, 
 		spriteIdle.setTexture(texture);
 		spriteIdle.setTextureRect(IntRect(x, y, width, height));
 	}
-}
-
-Entity::~Entity()
-{
 }
