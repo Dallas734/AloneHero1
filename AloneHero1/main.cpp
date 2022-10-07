@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include "Player.h"
+#include "Entity.h"
 
 using namespace sf;
 
@@ -40,7 +41,6 @@ int main()
             window.clear();
             window.draw(p.GetSprite(IDLE));
         }
-        //window.draw(p.GetSpriteIdle());
         window.display();
     }
 

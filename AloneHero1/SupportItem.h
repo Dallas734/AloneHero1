@@ -11,9 +11,9 @@ protected:
 	Image image;
 	Texture  texture;
 	Sprite sprite;
-	String directory;
+	String fileName;
 	double width, height;
-	// время действия
+	// время действия Time
 	double regenerationUnits;
 public:
 	SupportItem(double x, double y, double width, double height, int regenerationUnits, String directory);

@@ -4,7 +4,7 @@
 class GreenPotion : public SupportItem
 {
 	public:
-		GreenPotion(double x, double y, double width, double height, int improveUnits, String directory) : SupportItem(x, y, width, height, improveUnits, directory) {};
+		GreenPotion(double x, double y, double width, double height, int improveUnits, String fileName) : SupportItem(x, y, width, height, improveUnits, fileName) {};
 		void Improve(Player player) override;
 };
 

@@ -35,13 +35,13 @@ class Entity
 		double strength; // Сила
 		
 	public:
-		Entity(double x, double y);
+		Entity(double x, double y, double width, double height, double speed, int health, double strength);
 		~Entity() {};
 		virtual States Update(float time) = 0; // Функция покадрового обновления
-		virtual int Hit(double strength) = 0; // Удар
-		virtual void Damage(double strength) = 0; // Получение урона
-		virtual States Move(float time, Directions direction) = 0; // Движение
-		virtual States Idle(float time, Directions direction) = 0;
+		int Hit(float time, double width, double height, int frames, double strength, Directions direction); // Удар
+		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
+		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction); // Движение
+		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction);
 		void SetSpeed(double speed); // Установить скорость
 		double GetSpeed(); // Получить значение скорости
 		Sprite GetSprite(States spriteName); // Возвращает спрайт
