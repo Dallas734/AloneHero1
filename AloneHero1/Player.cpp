@@ -1,20 +1,33 @@
 #include "Player.h"
 
 
+void Player::HelthUP(int regenerationUnits)
+{
+	this->health += regenerationUnits;
+}
+
+void Player::SpeedUp(double improveUnits)
+{
+	this->speed += improveUnits;
+}
+
 States Player::Update(float time)
 {
+	Directions direction = RIGHT;
 	// Состояния
 	if ((Keyboard::isKeyPressed(Keyboard::Right)) || (Keyboard::isKeyPressed(Keyboard::D)))
 	{
+		direction = RIGHT;
 		return Move(time, RIGHT);
 	}
 	else if ((Keyboard::isKeyPressed(Keyboard::Left)) || (Keyboard::isKeyPressed(Keyboard::A)))
 	{
+		direction = LEFT;
 		return Move(time, LEFT);
 	}
 	else if (speed == 0)
 	{
-		return Idle(time);
+		return Idle(time, direction);
 	}
 	x += dx * time;
 	y += dy * time;
@@ -57,14 +70,26 @@ void Player::Damage(double strength)
 {
 }
 
-States Player::Idle(float time)
+States Player::Idle(float time, Directions direction)
 {
 	SetSprite("Idle.png", IDLE, 0, 0, 160, 111);
 	currentFrame += time * 0.005;
 	if (this->currentFrame > 8) this->currentFrame -= 8;
-	spriteIdle.setTextureRect(IntRect(160 * int(currentFrame), 0, 160, 111));
-	if (this->currentFrame > 8) this->currentFrame -= 8;
-	spriteIdle.setPosition(x, y);
+	// Доделать поворот!
+	if (direction == RIGHT)
+	{
+		spriteIdle.setTextureRect(IntRect(160 * int(currentFrame), 0, 160, 111));
+		spriteIdle.setOrigin({ 0, 0 });
+		spriteIdle.setScale(1, 1);
+		spriteIdle.setPosition(x, y);
+	}
+	else if (direction == LEFT)
+	{
+		spriteIdle.setTextureRect(IntRect(160 * int(currentFrame), 0, 160, 111));
+		spriteIdle.setOrigin({ spriteIdle.getLocalBounds().width, 0 });
+		spriteIdle.setScale(-1, 1);
+		spriteIdle.setPosition(x, y);
+	}
 	
 	return IDLE;
 }

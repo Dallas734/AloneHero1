@@ -41,7 +41,7 @@ class Entity
 		virtual int Hit(double strength) = 0; // Удар
 		virtual void Damage(double strength) = 0; // Получение урона
 		virtual States Move(float time, Directions direction) = 0; // Движение
-		virtual States Idle(float time) = 0;
+		virtual States Idle(float time, Directions direction) = 0;
 		void SetSpeed(double speed); // Установить скорость
 		double GetSpeed(); // Получить значение скорости
 		Sprite GetSprite(States spriteName); // Возвращает спрайт

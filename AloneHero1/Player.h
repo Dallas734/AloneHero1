@@ -8,12 +8,13 @@ class Player : public Entity
 		Player(double x, double y) : Entity(x, y) {}
 		~Player() {};
 		void Jump();
-		void HelthUP();
+		void HelthUP(int regenerationUnits);
 		void StrengthUP();
+		void SpeedUp(double improveUnits);
 		States Update(float time) override;
 		States Move(float time, Directions direction) override;
 		int Hit(double strength) override;
 		void Damage(double strength) override;
-		States Idle(float time) override;
+		States Idle(float time, Directions direction) override;
 };
 

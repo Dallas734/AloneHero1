@@ -153,12 +153,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GreenPotion.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RedPotion.cpp" />
+    <ClCompile Include="SupportItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GreenPotion.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RedPotion.h" />
+    <ClInclude Include="SupportItem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
