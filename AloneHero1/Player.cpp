@@ -13,17 +13,26 @@ void Player::SpeedUp(double improveUnits)
 
 States Player::Update(float time)
 {
-	Directions direction = RIGHT;
 	// Состояния
-	if ((Keyboard::isKeyPressed(Keyboard::Right)) || (Keyboard::isKeyPressed(Keyboard::D)))
+	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
 		direction = RIGHT;
-		return Move(time, 0, 0, this->width, this->height, 8, RIGHT);
+		return Move(time, 0, 0, this->width, this->height, 8, direction);
 	}
-	else if ((Keyboard::isKeyPressed(Keyboard::Left)) || (Keyboard::isKeyPressed(Keyboard::A)))
+	else if (Keyboard::isKeyPressed(Keyboard::A))
 	{
 		direction = LEFT;
-		return Move(time, 0, 0, this->width, this->height, 8, LEFT);
+		return Move(time, 0, 0, this->width, this->height, 8, direction);
+	}
+	else if (Keyboard::isKeyPressed(Keyboard::Right))
+	{
+		direction = RIGHT;
+		return Hit(time, 0, 0, this->width, this->height, 4, this->strength, direction);
+	}
+	else if (Keyboard::isKeyPressed(Keyboard::Left))
+	{
+		direction = LEFT;
+		return Hit(time, 0, 0, this->width, this->height, 4, this->strength, direction);
 	}
 	else if (dx == 0)
 	{

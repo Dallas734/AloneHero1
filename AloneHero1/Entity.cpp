@@ -14,9 +14,26 @@ Entity::Entity(double x, double y, double width, double height, double speed, in
 	this->dy = 0;
 }
 
-int Entity::Hit(float time, double width, double height, int frames, double strength, Directions direction)
+States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction)
 {
-	return 0;
+	SetSprite("Hit1.png", HIT, xBeginSprite, yBeginSprite, width, height);
+	currentFrame += time * 0.01;
+	if (this->currentFrame > frames) this->currentFrame -= frames;
+
+	if (direction == RIGHT)
+	{
+		spriteHit.setOrigin({ 0, 0 });
+		spriteHit.setScale(1, 1);
+	}
+	else if (direction == LEFT)
+	{
+		spriteHit.setOrigin({ spriteHit.getLocalBounds().width, 0 });
+		spriteHit.setScale(-1, 1);
+	}
+	spriteHit.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	spriteHit.setPosition(x, y);
+
+	return HIT;
 }
 
 void Entity::Damage(float time, double width, double height, int frames, double strength, Directions direction)
@@ -56,21 +73,20 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 	SetSprite("Idle.png", IDLE, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames) this->currentFrame -= frames;
-	// Доделать поворот!
+
 	if (direction == RIGHT)
 	{
-		spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 		spriteIdle.setOrigin({ 0, 0 });
 		spriteIdle.setScale(1, 1);
-		spriteIdle.setPosition(x, y);
 	}
 	else if (direction == LEFT)
 	{
-		spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 		spriteIdle.setOrigin({ spriteIdle.getLocalBounds().width, 0 });
 		spriteIdle.setScale(-1, 1);
-		spriteIdle.setPosition(x, y);
 	}
+
+	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	spriteIdle.setPosition(x, y);
 
 	return IDLE;
 }
@@ -96,6 +112,7 @@ Sprite Entity::GetSprite(States spriteName)
 	case DAMAGE:
 		break;
 	case HIT:
+		return spriteHit;
 		break;
 	case IDLE:
 		return spriteIdle;
@@ -118,6 +135,8 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 	case DAMAGE:
 		break;
 	case HIT:
+		spriteHit.setTexture(texture);
+		spriteHit.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case IDLE:
 		spriteIdle.setTexture(texture);

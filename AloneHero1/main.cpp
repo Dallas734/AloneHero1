@@ -10,7 +10,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
     Clock clock;
 
-    Player p(250, 250);
+    Player player(250, 250);
     
     while (window.isOpen())
     {
@@ -27,19 +27,24 @@ int main()
         }
         
         // Состояние для отображения соответствующей анимации.
-        States state;
-        state = p.Update(time);
+        States statePlayer;
+        statePlayer = player.Update(time);
 
         //p.Update(time);
-        if (state == RUN)
+        if (statePlayer == RUN)
         {
             window.clear();
-            window.draw(p.GetSprite(RUN));
+            window.draw(player.GetSprite(RUN));
         }
-        else if (state == IDLE)
+        else if (statePlayer == IDLE)
         {
             window.clear();
-            window.draw(p.GetSprite(IDLE));
+            window.draw(player.GetSprite(IDLE));
+        }
+        else if (statePlayer == HIT)
+        {
+            window.clear();
+            window.draw(player.GetSprite(HIT));
         }
         window.display();
     }

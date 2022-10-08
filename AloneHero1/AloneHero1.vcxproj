@@ -154,8 +154,10 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Eye.cpp" />
     <ClCompile Include="GreenPotion.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RedPotion.cpp" />
     <ClCompile Include="Skeleton.cpp" />
@@ -164,7 +166,9 @@
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Eye.h" />
     <ClInclude Include="GreenPotion.h" />
+    <ClInclude Include="Mushroom.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RedPotion.h" />
     <ClInclude Include="Skeleton.h" />
