@@ -10,12 +10,11 @@ class Player : public Entity
 			this->directory = "Player/";
 		};
 		~Player() {};
-		void Jump();
+		void Jump();	
 		void HelthUP(int regenerationUnits);
 		void StrengthUP();
 		void SpeedUp(double improveUnits);
 		States Update(float time) override;
-
 		/*States Move(float time, double width, double height, int frames, Directions direction) override;
 		int Hit(float time, double width, double height, int frames, double strength, Directions direction) override;
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction) override;
