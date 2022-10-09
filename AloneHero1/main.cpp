@@ -26,27 +26,9 @@ int main()
                 window.close();
         }
         
-        // Состояние для отображения соответствующей анимации.
-        States statePlayer;
-        statePlayer = player.Update(time);
 
-        //p.Update(time);
-        if (statePlayer == RUN)
-        {
-            window.clear();
-            window.draw(player.GetSprite(RUN));
-        }
-        else if (statePlayer == IDLE)
-        {
-            window.clear();
-            window.draw(player.GetSprite(IDLE));
-        }
-        else if (statePlayer == HIT)
-        {
-            window.clear();
-            window.draw(player.GetSprite(HIT));
-        }
-        window.display();
+        player.Update(time, window);
+
     }
 
     return 0;

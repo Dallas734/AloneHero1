@@ -8,7 +8,8 @@ enum States
 	RUN,
 	HIT,
 	DAMAGE,
-	IDLE
+	IDLE,
+	JUMP
 };
 
 enum Directions
@@ -27,11 +28,14 @@ class Entity
 		double currentFrame; // Текущий кадр
 		int health; // Здоровье
 		double strength; // Сила
+		bool onGround;
 
 		String directory; // Имя директории, где хранятся анимации
 		Sprite spriteMove; // Спрайт движения
 		Sprite spriteIdle; // Спрайт статичного состояния
 		Sprite spriteHit; // Спрайт удара
+		Sprite spriteJump;
+		States state;
 		Image image; // Картинка для создания спрайтов
 		Texture texture; // Текстура для создания спрайтов
 		Directions direction; // Направление движения
@@ -39,11 +43,11 @@ class Entity
 	public:
 		Entity(double x, double y, double width, double height, double speed, int health, double strength);
 		~Entity() {};
-		virtual States Update(float time) = 0; // Функция покадрового обновления
-		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction); // Удар
+		virtual void Update(float time, RenderWindow& window) = 0; // Функция покадрового обновления
+		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window); // Удар
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
-		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction); // Движение
-		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction);
+		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window); // Движение
+		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window);
 		void SetSpeed(double speed); // Установить скорость
 		double GetSpeed(); // Получить значение скорости
 		Sprite GetSprite(States spriteName); // Возвращает спрайт

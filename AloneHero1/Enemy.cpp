@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-States Enemy::Update(float time)
+void Enemy::Update(float time, RenderWindow& window)
 {
-    return States();
+
 }

@@ -12,9 +12,10 @@ Entity::Entity(double x, double y, double width, double height, double speed, in
 	this->currentFrame = 0;
 	this->dx = 0;
 	this->dy = 0;
+	this->onGround = false;
 }
 
-States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction)
+States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window)
 {
 	SetSprite("Hit1.png", HIT, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.01;
@@ -24,14 +25,19 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	{
 		spriteHit.setOrigin({ 0, 0 });
 		spriteHit.setScale(1, 1);
+		this->state = HIT;
 	}
 	else if (direction == LEFT)
 	{
 		spriteHit.setOrigin({ spriteHit.getLocalBounds().width, 0 });
 		spriteHit.setScale(-1, 1);
+		this->state = HIT;
 	}
 	spriteHit.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteHit.setPosition(x, y);
+	window.clear();
+	window.draw(GetSprite(HIT));
+	window.display();
 
 	return HIT;
 }
@@ -40,21 +46,23 @@ void Entity::Damage(float time, double width, double height, int frames, double 
 {
 }
 
-States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction)
+States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window)
 {
+	
 	SetSprite("Run.png", RUN, xBeginSprite, yBeginSprite, width, height);
-	speed = this->speed; // PLAYER_SPEED
-	if (direction == RIGHT)
+	if (direction == RIGHT && (state == IDLE || state == RUN))
 	{
 		dx = speed;
 		spriteMove.setOrigin({ 0, 0 });
 		spriteMove.setScale(1, 1);
+		this->state = RUN;
 	}
-	else if (direction == LEFT)
+	else if (direction == LEFT && (state == IDLE || state == RUN))
 	{
 		dx = -speed;
 		spriteMove.setOrigin({ spriteMove.getLocalBounds().width, 0 });
 		spriteMove.setScale(-1, 1);
+		this->state = RUN;
 	}
 	spriteMove.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	x += dx * time;
@@ -64,11 +72,14 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	dx = 0;
 	dy = 0;
 	spriteMove.setPosition(x, y);
+	window.clear();
+	window.draw(GetSprite(RUN));
+	window.display(); 
 
 	return RUN;
 }
 
-States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction)
+States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window)
 {
 	SetSprite("Idle.png", IDLE, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.005;
@@ -78,15 +89,21 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 	{
 		spriteIdle.setOrigin({ 0, 0 });
 		spriteIdle.setScale(1, 1);
+		this->state = IDLE;
 	}
 	else if (direction == LEFT)
 	{
 		spriteIdle.setOrigin({ spriteIdle.getLocalBounds().width, 0 });
 		spriteIdle.setScale(-1, 1);
+		this->state = IDLE;
 	}
+
 
 	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteIdle.setPosition(x, y);
+	window.clear();
+	window.draw(GetSprite(IDLE));
+	window.display();
 
 	return IDLE;
 }
@@ -117,6 +134,9 @@ Sprite Entity::GetSprite(States spriteName)
 	case IDLE:
 		return spriteIdle;
 		break;
+	case JUMP:
+		return spriteJump;
+		break;
 	}
 }
 
@@ -141,5 +161,8 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 	case IDLE:
 		spriteIdle.setTexture(texture);
 		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+	case JUMP:
+		spriteJump.setTexture(texture);
+		spriteJump.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 	}
 }

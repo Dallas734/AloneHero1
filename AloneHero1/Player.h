@@ -8,13 +8,14 @@ class Player : public Entity
 		Player(double x, double y) : Entity(x, y, 160, 111, 0.1, 100, 100)
 		{
 			this->directory = "Player/";
+			this->state = IDLE;
 		};
 		~Player() {};
-		void Jump();	
+		States Jump(float time, bool onGround, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window);
 		void HelthUP(int regenerationUnits);
 		void StrengthUP();
 		void SpeedUp(double improveUnits);
-		States Update(float time) override;
+		void Update(float time, RenderWindow& window) override;
 		/*States Move(float time, double width, double height, int frames, Directions direction) override;
 		int Hit(float time, double width, double height, int frames, double strength, Directions direction) override;
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction) override;
