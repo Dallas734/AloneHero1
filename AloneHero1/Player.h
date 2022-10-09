@@ -11,7 +11,8 @@ class Player : public Entity
 			this->state = IDLE;
 		};
 		~Player() {};
-		States Jump(float time, bool onGround, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window);
+		States Jump(bool& keyPressed, float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window);
+		void Control();
 		void HelthUP(int regenerationUnits);
 		void StrengthUP();
 		void SpeedUp(double improveUnits);

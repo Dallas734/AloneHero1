@@ -28,6 +28,9 @@ int main()
         
 
         player.Update(time, window);
+        //window.clear();
+        //window.draw(player.GetSprite(player.GetState()));
+        //window.display();
 
     }
 

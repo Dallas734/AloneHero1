@@ -52,6 +52,7 @@ class Entity
 		double GetSpeed(); // Получить значение скорости
 		Sprite GetSprite(States spriteName); // Возвращает спрайт
 		void SetSprite(String fileName, States spriteName, double x, double y, double width, double height);
+		States GetState();
 
 };
 

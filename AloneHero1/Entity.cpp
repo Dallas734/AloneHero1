@@ -50,14 +50,14 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 {
 	
 	SetSprite("Run.png", RUN, xBeginSprite, yBeginSprite, width, height);
-	if (direction == RIGHT && (state == IDLE || state == RUN))
+	if (direction == RIGHT && /*(state == IDLE || state == RUN)*/onGround)
 	{
 		dx = speed;
 		spriteMove.setOrigin({ 0, 0 });
 		spriteMove.setScale(1, 1);
 		this->state = RUN;
 	}
-	else if (direction == LEFT && (state == IDLE || state == RUN))
+	else if (direction == LEFT && /*(state == IDLE || state == RUN)*/onGround)
 	{
 		dx = -speed;
 		spriteMove.setOrigin({ spriteMove.getLocalBounds().width, 0 });
@@ -71,10 +71,13 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	if (this->currentFrame > frames) this->currentFrame -= frames;
 	dx = 0;
 	dy = 0;
-	spriteMove.setPosition(x, y);
-	window.clear();
-	window.draw(GetSprite(RUN));
-	window.display(); 
+	if (onGround)
+	{
+		spriteMove.setPosition(x, y);
+		window.clear();
+		window.draw(GetSprite(RUN));
+		window.display();
+	}
 
 	return RUN;
 }
@@ -97,7 +100,8 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 		spriteIdle.setScale(-1, 1);
 		this->state = IDLE;
 	}
-
+	dx = 0;
+	dy = 0;
 
 	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteIdle.setPosition(x, y);
@@ -123,6 +127,9 @@ Sprite Entity::GetSprite(States spriteName)
 {
 	switch (spriteName)
 	{
+	case JUMP:
+		return spriteJump;
+		break;
 	case RUN:
 		return spriteMove;
 		break;
@@ -133,9 +140,6 @@ Sprite Entity::GetSprite(States spriteName)
 		break;
 	case IDLE:
 		return spriteIdle;
-		break;
-	case JUMP:
-		return spriteJump;
 		break;
 	}
 }
@@ -148,6 +152,10 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 
 	switch (spriteName)
 	{
+	case JUMP:
+		spriteJump.setTexture(texture);
+		spriteJump.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		break;
 	case RUN:
 		spriteMove.setTexture(texture);
 		spriteMove.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
@@ -161,8 +169,11 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 	case IDLE:
 		spriteIdle.setTexture(texture);
 		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
-	case JUMP:
-		spriteJump.setTexture(texture);
-		spriteJump.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		break;
 	}
+}
+
+States Entity::GetState()
+{
+	return this->state;
 }
