@@ -17,12 +17,14 @@ States Player::Jump(bool& keyPressed, float time, double xBeginSprite, double yB
 	if (direction == RIGHT)
 	{
 		dx = speed;
+		x += dx * time;
 		spriteJump.setOrigin({ 0, 0 });
 		spriteJump.setScale(1, 1);
 	}
 	else if (direction == LEFT)
 	{
 		dx = -speed;
+		x += dx * time;
 		spriteJump.setOrigin({ spriteJump.getLocalBounds().width, 0 });
 		spriteJump.setScale(-1, 1);
 	}
@@ -30,7 +32,7 @@ States Player::Jump(bool& keyPressed, float time, double xBeginSprite, double yB
 	y += dy * time;
 	dx = 0;
 	dy = 0;
-	spriteJump.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	spriteJump.setTextureRect(IntRect(width /** int(currentFrame)*/, yBeginSprite, width, height));
 	spriteJump.setPosition(x, y);
 	window.clear();
 	window.draw(GetSprite(JUMP));
@@ -61,12 +63,13 @@ void Player::Update(float time, RenderWindow& window)
 
 	// Уровень земли и падение
 	int ground = 300;
-	if (!onGround)
+	if (!onGround || state == JUMP)
 	{
 		dy += 0.0001 * time;
+		y += dy * time;
+		x += dx * time;
 		// onGround = true;
 	}
-	y += dy * time;
 	//onGround = false;
 	if (y > ground)
 	{
@@ -76,13 +79,13 @@ void Player::Update(float time, RenderWindow& window)
 	}
 
 	// Состояния
-	if (Keyboard::isKeyPressed(Keyboard::D))
+	if (Keyboard::isKeyPressed(Keyboard::D) && onGround)
 	{
 		direction = RIGHT;
 		state = RUN;
 		Move(time, 0, 0, this->width, this->height, 8, direction, window);
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::A))
+	else if (Keyboard::isKeyPressed(Keyboard::A) && onGround)
 	{
 		direction = LEFT;
 		state = RUN;
@@ -100,7 +103,7 @@ void Player::Update(float time, RenderWindow& window)
 		state = HIT;
 		Hit(time, 0, 0, this->width, this->height, 4, this->strength, direction, window);
 	}
-	else if ((dy == 0 || state == IDLE) && onGround)
+	else if ((dy == 0 || state == IDLE)/* && onGround*/)
 	{
 		state = IDLE;
 		Idle(time, 0, 0, this->width, this->height, 8, direction, window);

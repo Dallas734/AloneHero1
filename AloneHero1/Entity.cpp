@@ -9,6 +9,7 @@ Entity::Entity(double x, double y, double width, double height, double speed, in
 	this->speed = speed;
 	this->health = health;
 	this->strength = strength;
+	this->direction = RIGHT;
 	this->currentFrame = 0;
 	this->dx = 0;
 	this->dy = 0;
@@ -66,11 +67,11 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	}
 	spriteMove.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	x += dx * time;
-	y += dy * time;
+	//y += dy * time;
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames) this->currentFrame -= frames;
-	dx = 0;
-	dy = 0;
+	//dx = 0;
+	//dy = 0;
 	if (onGround)
 	{
 		spriteMove.setPosition(x, y);
@@ -100,8 +101,8 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 		spriteIdle.setScale(-1, 1);
 		this->state = IDLE;
 	}
-	dx = 0;
-	dy = 0;
+	//dx = 0;
+	//dy = 0;
 
 	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteIdle.setPosition(x, y);
