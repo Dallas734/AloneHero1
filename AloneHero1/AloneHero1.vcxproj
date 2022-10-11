@@ -156,23 +156,31 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="GreenPotion.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RedPotion.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SupportItem.cpp" />
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Eye.h" />
     <ClInclude Include="GreenPotion.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Mushroom.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RedPotion.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SupportItem.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "Player.h"
 #include "Entity.h"
+#include "Level.h"
+
 
 using namespace sf;
 
@@ -10,7 +12,11 @@ int main()
     sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
     Clock clock;
 
-    Player player(250, 250);
+    // Карта
+    Level lvl;//создали экземпляр класса уровень
+    lvl.LoadFromFile("Levels/map_XML.tmx");//загрузили в него карту, внутри класса с помощью методов он ее обработает.
+
+    Player player(0, 0);
     
     while (window.isOpen())
     {
@@ -25,12 +31,17 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        
-
         player.Update(time, window);
-        //window.clear();
-        //window.draw(player.GetSprite(player.GetState()));
+
+        // Отрисовка
+        window.clear();
+        lvl.Draw(window);
         //window.display();
+        //lvl.Draw(window);
+        //player.Update(time, window);
+        //window.clear();
+        window.draw(player.GetSprite(player.GetState()));
+        window.display();
 
     }
 

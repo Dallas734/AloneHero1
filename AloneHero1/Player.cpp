@@ -34,9 +34,9 @@ States Player::Jump(bool& keyPressed, float time, double xBeginSprite, double yB
 
 	spriteJump.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteJump.setPosition(x, y);
-	window.clear();
+	/*window.clear();
 	window.draw(GetSprite(JUMP));
-	window.display();
+	window.display();*/
 	
 	return JUMP;
 }

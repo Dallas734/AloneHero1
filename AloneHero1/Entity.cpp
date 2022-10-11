@@ -36,9 +36,9 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	}
 	spriteHit.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteHit.setPosition(x, y);
-	window.clear();
+	/*window.clear();
 	window.draw(GetSprite(HIT));
-	window.display();
+	window.display();*/
 
 	return HIT;
 }
@@ -75,9 +75,9 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	if (onGround)
 	{
 		spriteMove.setPosition(x, y);
-		window.clear();
+		/*window.clear();
 		window.draw(GetSprite(RUN));
-		window.display();
+		window.display();*/
 	}
 
 	return RUN;
@@ -106,9 +106,9 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 
 	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteIdle.setPosition(x, y);
-	window.clear();
+	/*window.clear();
 	window.draw(GetSprite(IDLE));
-	window.display();
+	window.display();*/
 
 	return IDLE;
 }
