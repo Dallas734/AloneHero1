@@ -1,26 +1,48 @@
 ﻿  Player.cpp
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,84): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(51,84): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,77): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(51,77): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,63): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(51,63): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,42): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(51,42): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(40,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(40,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(126,26): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(126,19): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-  AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(52,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(52,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(93,84): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(93,77): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(93,63): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(93,42): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(94,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(94,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(205,26): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(205,19): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  AloneHero1.vcxproj -> C:\Users\Aleksandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe

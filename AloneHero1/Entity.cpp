@@ -68,13 +68,13 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	}
 	spriteMove.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	x += dx * time;
-	CheckCollisionWithMap(dx, 0, level);
+	CheckCollisionWithMap(dx, 0, level, time);
 	//y += dy * time;
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames) this->currentFrame -= frames;
 	//dx = 0;
-	dy = 0;
-	CheckCollisionWithMap(0, dy, level);
+	//dy = 0;
+	CheckCollisionWithMap(0, dy, level, time);
 	if (onGround)
 	{
 		//dy = 0;
@@ -84,10 +84,12 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 		window.display();*/
 	}
 
+	dx = 0;
+
 	return RUN;
 }
 
-States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window)
+States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
 {
 	SetSprite("Idle.png", IDLE, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.005;
@@ -107,7 +109,6 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 	}
 	//dx = 0;
 	//dy = 0;
-
 	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	spriteIdle.setPosition(x, y);
 	/*window.clear();
@@ -146,6 +147,9 @@ Sprite Entity::GetSprite(States spriteName)
 	case IDLE:
 		return spriteIdle;
 		break;
+	case FALL:
+		return spriteFall;
+		break;
 	}
 }
 
@@ -175,6 +179,9 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 		spriteIdle.setTexture(texture);
 		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
+	case FALL:
+		spriteFall.setTexture(texture);
+		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 	}
 }
 

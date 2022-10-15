@@ -11,7 +11,8 @@ enum States
 	HIT,
 	DAMAGE,
 	IDLE,
-	JUMP
+	JUMP,
+	FALL
 };
 
 enum Directions
@@ -37,6 +38,7 @@ class Entity
 		Sprite spriteIdle; // Спрайт статичного состояния
 		Sprite spriteHit; // Спрайт удара
 		Sprite spriteJump;
+		Sprite spriteFall;
 		States state;
 		Image image; // Картинка для создания спрайтов
 		Texture texture; // Текстура для создания спрайтов
@@ -49,13 +51,13 @@ class Entity
 		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window); // Удар
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
-		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window);
+		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 		void SetSpeed(double speed); // Установить скорость
 		double GetSpeed(); // Получить значение скорости
 		Sprite GetSprite(States spriteName); // Возвращает спрайт
 		void SetSprite(String fileName, States spriteName, double x, double y, double width, double height);
 		States GetState();
 		FloatRect getRect();
-		virtual void CheckCollisionWithMap(double dx, double dy, Level* level) = 0;
+		virtual void CheckCollisionWithMap(double dx, double dy, Level* level, float time) = 0;
 };
 
