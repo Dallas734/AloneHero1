@@ -4,19 +4,19 @@
 #include "Entity.h"
 #include "Level.h"
 
-
 using namespace sf;
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
-    Clock clock;
+   Clock clock;
 
     //  арта
-    Level lvl;//создали экземпл€р класса уровень
-    lvl.LoadFromFile("Levels/map_XML.tmx");//загрузили в него карту, внутри класса с помощью методов он ее обработает.
+    Level lvl("map_XML.tmx");//создали экземпл€р класса уровень
+    //lvl.LoadFromFile("Levels/map_XML.tmx");//загрузили в него карту, внутри класса с помощью методов он ее обработает.
 
-    Player player(0, 0);
+    //Player player(0, 0);
+    //player.GetPlayerView().reset(FloatRect(0, 0, 640, 480));
     
     while (window.isOpen())
     {
@@ -31,17 +31,17 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        player.Update(time, window);
-
-        // ќтрисовка
-        window.clear();
-        lvl.Draw(window);
-        //window.display();
-        //lvl.Draw(window);
         //player.Update(time, window);
+
+        //// ќтрисовка
+        //window.setView(player.GetPlayerView());
+
         //window.clear();
-        window.draw(player.GetSprite(player.GetState()));
-        window.display();
+        //lvl.Draw(window);
+
+        //window.draw(player.GetSprite(player.GetState()));
+        //window.display();
+        lvl.Draw(window, time);
 
     }
 

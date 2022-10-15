@@ -1,5 +1,7 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include "levelfwd.h"
 
 using namespace sf;
 
@@ -43,16 +45,17 @@ class Entity
 	public:
 		Entity(double x, double y, double width, double height, double speed, int health, double strength);
 		~Entity() {};
-		virtual void Update(float time, RenderWindow& window) = 0; // Функция покадрового обновления
+		virtual void Update(float time, RenderWindow& window, Level* level) = 0; // Функция покадрового обновления
 		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window); // Удар
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
-		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window); // Движение
+		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window);
 		void SetSpeed(double speed); // Установить скорость
 		double GetSpeed(); // Получить значение скорости
 		Sprite GetSprite(States spriteName); // Возвращает спрайт
 		void SetSprite(String fileName, States spriteName, double x, double y, double width, double height);
 		States GetState();
-
+		FloatRect getRect();
+		virtual void CheckCollisionWithMap(double dx, double dy, Level* level) = 0;
 };
 

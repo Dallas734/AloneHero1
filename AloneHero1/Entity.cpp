@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Level.h"
 
 Entity::Entity(double x, double y, double width, double height, double speed, int health, double strength)
 {
@@ -47,7 +48,7 @@ void Entity::Damage(float time, double width, double height, int frames, double 
 {
 }
 
-States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window)
+States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
 {
 	
 	SetSprite("Run.png", RUN, xBeginSprite, yBeginSprite, width, height);
@@ -67,13 +68,16 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	}
 	spriteMove.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
 	x += dx * time;
+	CheckCollisionWithMap(dx, 0, level);
 	//y += dy * time;
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames) this->currentFrame -= frames;
 	//dx = 0;
-	//dy = 0;
+	dy = 0;
+	CheckCollisionWithMap(0, dy, level);
 	if (onGround)
 	{
+		//dy = 0;
 		spriteMove.setPosition(x, y);
 		/*window.clear();
 		window.draw(GetSprite(RUN));
@@ -177,4 +181,9 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 States Entity::GetState()
 {
 	return this->state;
+}
+
+FloatRect Entity::getRect()
+{
+	return FloatRect(x, y, width, height);
 }

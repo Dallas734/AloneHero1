@@ -1,19 +1,20 @@
 #include "Level.h"
 
-int Object::GetPropertyInt(std::string name)//возвращаем номер свойства в нашем списке
-{
-	return atoi(properties[name].c_str());
-}
 
-float Object::GetPropertyFloat(std::string name)
-{
-	return strtod(properties[name].c_str(), NULL);
-}
-
-std::string Object::GetPropertyString(std::string name)//получить имя в виде строки.вроде понятно
-{
-	return properties[name];
-}
+//int Object::GetPropertyInt(std::string name)//возвращаем номер свойства в нашем списке
+//{
+//	return atoi(properties[name].c_str());
+//}
+//
+//float Object::GetPropertyFloat(std::string name)
+//{
+//	return strtod(properties[name].c_str(), NULL);
+//}
+//
+//std::string Object::GetPropertyString(std::string name)//получить имя в виде строки.вроде понятно
+//{
+//	return properties[name];
+//}
 
 bool Level::LoadFromFile(std::string filename)//двоеточия-обращение к методам класса вне класса 
 {
@@ -292,12 +293,22 @@ sf::Vector2i Level::GetTileSize()
 	return sf::Vector2i(tileWidth, tileHeight);
 }
 
-void Level::Draw(sf::RenderWindow& window)
+void Level::Draw(sf::RenderWindow& window, float time)
 {
+	player->Update(time, window, this);
+
+	// Отрисовка
+	window.setView(player->GetPlayerView());
+
+	window.clear();
+
 	// рисуем все тайлы (объекты не рисуем!)
 	for (int layer = 0; layer < layers.size(); layer++)
 		for (int tile = 0; tile < layers[layer].tiles.size(); tile++)
 			window.draw(layers[layer].tiles[tile]);
+
+	window.draw(player->GetSprite(player->GetState()));
+	window.display();
 }
 
 

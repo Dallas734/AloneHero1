@@ -1,3 +1,26 @@
-﻿  main.cpp
-C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\main.cpp(24,20): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-  AloneHero1.vcxproj -> C:\Users\Aleksandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe
+﻿  Player.cpp
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,84): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,77): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,63): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(39,42): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(40,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(40,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(126,26): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(126,19): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe
