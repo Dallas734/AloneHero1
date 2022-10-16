@@ -15,7 +15,7 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 		onGround = false;
 	}
 
-	if (direction == RIGHT)
+	/*if (direction == RIGHT)
 	{
 		dx = speed;
 		x += dx * time;
@@ -30,7 +30,7 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 		CheckCollisionWithMap(dx, 0, level, time);
 		spriteJump.setOrigin({ spriteJump.getLocalBounds().width, 0 });
 		spriteJump.setScale(-1, 1);
-	}
+	}*/
 
 	if (onGround)
 	{
@@ -123,19 +123,45 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	CheckCollisionWithMap(0, dy, level, time);
 
 	// Состояния
-	if (Keyboard::isKeyPressed(Keyboard::D) && onGround)
-	{
-		direction = RIGHT;
-		state = RUN;
-		Move(time, 0, 0, this->width, this->height, 8, direction, window, level);
-		ViewOnPlayer(x, y);
+	if (Keyboard::isKeyPressed(Keyboard::D)/* && onGround*/)
+	{	
+		if (state == IDLE)
+		{
+			direction = RIGHT;
+			state = RUN;
+			Move(time, 0, 0, this->width, this->height, 8, direction, window, level);
+			ViewOnPlayer(x, y);
+		}
+		if (state == JUMP)
+		{
+			dx = speed;
+			x += dx * time;
+			CheckCollisionWithMap(dx, 0, level, time);
+			spriteJump.setOrigin({ 0, 0 });
+			spriteJump.setScale(1, 1);
+			dx = 0;
+		}
+		
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::A) && onGround)
+	else if (Keyboard::isKeyPressed(Keyboard::A)/* && onGround*/)
 	{
-		direction = LEFT;
-		state = RUN;
-		Move(time, 0, 0, this->width, this->height, 8, direction, window, level);
-		ViewOnPlayer(x, y);
+		if (state == IDLE)
+		{
+			direction = LEFT;
+			state = RUN;
+			Move(time, 0, 0, this->width, this->height, 8, direction, window, level);
+			ViewOnPlayer(x, y);
+		}
+		if (state == JUMP)
+		{
+			dx = -speed;
+			x += dx * time;
+			CheckCollisionWithMap(dx, 0, level, time);
+			spriteJump.setOrigin({ spriteJump.getLocalBounds().width, 0 });
+			spriteJump.setScale(-1, 1);
+			dx = 0;
+		}
+		
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
@@ -196,7 +222,7 @@ void Player::CheckCollisionWithMap(double dx, double dy, Level* level, float tim
 				if (dy > 0) {
 					y = obj[i].rect.top - height;
 					this->dy = 0; // Для анимации
-					//state = IDLE;
+					state = IDLE;
 					onGround = true;
 				}
 				if (dy < 0) { y = obj[i].rect.top + obj[i].rect.height; /*this->dy = 0;*/ std::cout << "I'm minus!"; }
