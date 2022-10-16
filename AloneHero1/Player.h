@@ -17,7 +17,7 @@ class Player : public Entity
 			this->state = FALL;
 		};
 		~Player() {};
-		States Jump(bool& keyPressed, float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
+		States Jump(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 		States Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 		void HelthUP(int regenerationUnits);
 		void StrengthUP();
