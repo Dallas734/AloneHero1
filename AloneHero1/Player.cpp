@@ -15,23 +15,6 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 		onGround = false;
 	}
 
-	/*if (direction == RIGHT)
-	{
-		dx = speed;
-		x += dx * time;
-		CheckCollisionWithMap(dx, 0, level, time);
-		spriteJump.setOrigin({ 0, 0 });
-		spriteJump.setScale(1, 1);
-	}
-	else if (direction == LEFT)
-	{
-		dx = -speed;
-		x += dx * time;
-		CheckCollisionWithMap(dx, 0, level, time);
-		spriteJump.setOrigin({ spriteJump.getLocalBounds().width, 0 });
-		spriteJump.setScale(-1, 1);
-	}*/
-
 	if (onGround)
 	{
 		dy = 0;
@@ -47,8 +30,10 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 
 	//CheckCollisionWithMap(0, dy, level);
 	dx = 0;
-
-	spriteJump.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	
+	//spriteJump.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
+	spriteJump.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	
 	spriteJump.setPosition(x, y);
 	/*window.clear();
 	window.draw(GetSprite(JUMP));
@@ -90,7 +75,8 @@ States Player::Fall(float time, double xBeginSprite, double yBeginSprite, double
 		CheckCollisionWithMap(0, dy, level, time);
 	}
 
-	spriteFall.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	//spriteFall.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	spriteFall.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	spriteFall.setPosition(x, y);
 
 	return FALL;
@@ -111,7 +97,6 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	std::cout << dy;
 
 	// Уровень земли и падение
-
 	if (onGround && dy == 0 && state != IDLE)
 	{
 		state = FALL;
@@ -163,18 +148,18 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		}
 		
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Right))
+	else if (Keyboard::isKeyPressed(Keyboard::Right) && onGround)
 	{
 		direction = RIGHT;
 		state = HIT;
-		Hit(time, 0, 0, this->width, this->height, 4, this->strength, direction, window);
+		Hit(time, 56, 44, 111, this->height, BUF_OF_PLAYER_HIT, 4, this->strength, direction, window);
 		ViewOnPlayer(x, y);
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Left)  && onGround)
+	else if (Keyboard::isKeyPressed(Keyboard::Left) && onGround)
 	{
 		direction = LEFT;
 		state = HIT;
-		Hit(time, 0, 0, this->width, this->height, 4, this->strength, direction, window);
+		Hit(time, 54, 44, 111, this->height, BUF_OF_PLAYER_HIT, 4, this->strength, direction, window);
 		ViewOnPlayer(x, y);
 	}
 	else if (state == IDLE)
@@ -186,15 +171,15 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 
 	if (state == FALL)
 	{
-		state = Fall(time, 0, 0, this->width, this->height, 2, direction, window, level);
+		state = Fall(time, 56, 44, this->width, this->height, 2, direction, window, level);
 		ViewOnPlayer(x, y);
 	}
 	
 
-	if ((Keyboard::isKeyPressed(Keyboard::Space) && onGround) || (!onGround && state == JUMP))
+	if (((Keyboard::isKeyPressed(Keyboard::Space) && onGround) || (!onGround && state == JUMP)) && state != HIT)
 	{
 		state = JUMP;
-		Jump(time, 0, 0, this->width, this->height, 2, direction, window, level);
+		Jump(time, 56, 44, this->width, this->height, 2, direction, window, level);
 		ViewOnPlayer(x, y);
 	}
 

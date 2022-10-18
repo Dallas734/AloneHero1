@@ -17,7 +17,7 @@ Entity::Entity(double x, double y, double width, double height, double speed, in
 	this->onGround = false;
 }
 
-States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window)
+States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window)
 {
 	SetSprite("Hit1.png", HIT, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.01;
@@ -31,11 +31,12 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	}
 	else if (direction == LEFT)
 	{
-		spriteHit.setOrigin({ spriteHit.getLocalBounds().width, 0 });
+		spriteHit.setOrigin({ spriteHit.getLocalBounds().width / 2, 0 });
 		spriteHit.setScale(-1, 1);
 		this->state = HIT;
 	}
-	spriteHit.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	
+	spriteHit.setTextureRect(IntRect(xBeginSprite + (width + buf) * int(currentFrame), yBeginSprite, width, height));
 	spriteHit.setPosition(x, y);
 	/*window.clear();
 	window.draw(GetSprite(HIT));
@@ -66,14 +67,10 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 		spriteMove.setScale(-1, 1);
 		this->state = RUN;
 	}
-	if (currentFrame == 1)
-	{
-		spriteMove.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
-	}
-	else
-	{
-		spriteMove.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	}
+	
+	//spriteMove.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
+	spriteMove.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	
 	x += dx * time;
 	CheckCollisionWithMap(dx, 0, level, time);
 	//y += dy * time;
@@ -123,14 +120,10 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 	//dx = 0;
 	//dy = 0;
 
-	if (currentFrame == 1)
-	{
-		spriteIdle.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
-	}
-	else
-	{
-		spriteIdle.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	}
+	
+	//spriteIdle.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
+	spriteIdle.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	
 	/*spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));*/
 	spriteIdle.setPosition(x, y);
 	/*window.clear();

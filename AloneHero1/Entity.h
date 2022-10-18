@@ -49,7 +49,7 @@ class Entity
 		Entity(double x, double y, double width, double height, double speed, int health, double strength);
 		~Entity() {};
 		virtual void Update(float time, RenderWindow& window, Level* level) = 0; // Функция покадрового обновления
-		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window); // Удар
+		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window); // Удар
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
