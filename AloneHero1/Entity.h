@@ -28,6 +28,7 @@ class Entity
 		double dx, dy; // Ускорение
 		double x, y; // Координаты
 		double width, height; // Ширина и высота
+		double bufWidth; // Буферная ширина для вырезания спрайтов 
 		double currentFrame; // Текущий кадр
 		int health; // Здоровье
 		double strength; // Сила

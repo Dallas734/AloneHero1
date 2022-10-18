@@ -50,7 +50,7 @@ void Entity::Damage(float time, double width, double height, int frames, double 
 
 States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
 {
-	
+
 	SetSprite("Run.png", RUN, xBeginSprite, yBeginSprite, width, height);
 	if (direction == RIGHT && /*(state == IDLE || state == RUN)*/onGround)
 	{
@@ -66,12 +66,22 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 		spriteMove.setScale(-1, 1);
 		this->state = RUN;
 	}
-	spriteMove.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+	if (currentFrame == 1)
+	{
+		spriteMove.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
+	}
+	else
+	{
+		spriteMove.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	}
 	x += dx * time;
 	CheckCollisionWithMap(dx, 0, level, time);
 	//y += dy * time;
 	currentFrame += time * 0.005;
-	if (this->currentFrame > frames) this->currentFrame -= frames;
+	if (this->currentFrame > frames)
+	{
+		this->currentFrame -= frames;
+	}
 	//dx = 0;
 	//dy = 0;
 	CheckCollisionWithMap(0, dy, level, time);
@@ -93,7 +103,10 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 {
 	SetSprite("Idle.png", IDLE, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.005;
-	if (this->currentFrame > frames) this->currentFrame -= frames;
+	if (this->currentFrame > frames)
+	{
+		this->currentFrame -= frames;
+	}
 
 	if (direction == RIGHT)
 	{
@@ -109,7 +122,16 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 	}
 	//dx = 0;
 	//dy = 0;
-	spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
+
+	if (currentFrame == 1)
+	{
+		spriteIdle.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
+	}
+	else
+	{
+		spriteIdle.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	}
+	/*spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));*/
 	spriteIdle.setPosition(x, y);
 	/*window.clear();
 	window.draw(GetSprite(IDLE));

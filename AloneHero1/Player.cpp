@@ -129,7 +129,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			direction = RIGHT;
 			state = RUN;
-			Move(time, 0, 0, this->width, this->height, 8, direction, window, level);
+			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
 			ViewOnPlayer(x, y);
 		}
 		if (state == JUMP)
@@ -149,7 +149,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			direction = LEFT;
 			state = RUN;
-			Move(time, 0, 0, this->width, this->height, 8, direction, window, level);
+			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
 			ViewOnPlayer(x, y);
 		}
 		if (state == JUMP)
@@ -180,7 +180,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	else if (state == IDLE)
 	{
 		state = IDLE;
-		Idle(time, 0, 0, this->width, this->height, 8, direction, window, level);
+		Idle(time, 56, 44, this->width, this->height, 8, direction, window, level);
 		ViewOnPlayer(x, y);
 	}
 
