@@ -8,8 +8,8 @@ using namespace sf;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
-   Clock clock;
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "SFML works!");
+    Clock clock;
 
     // Карта
     Level lvl("map_XML.tmx");//создали экземпляр класса уровень

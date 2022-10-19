@@ -187,7 +187,12 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 
 void Player::ViewOnPlayer(double x, double y)
 {
-	view.setCenter(x + 100, y);
+	double tempX = x;
+	double tempY = y;
+
+	view.setSize(1200, 800);
+	view.zoom(0.5);
+	view.setCenter(tempX + 50, tempY);
 }
 
 View Player::GetPlayerView()
