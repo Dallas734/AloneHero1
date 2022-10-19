@@ -1,12 +1,10 @@
 #include "Entity.h"
 #include "Level.h"
 
-Entity::Entity(double x, double y, double width, double height, double speed, int health, double strength)
+Entity::Entity(double x, double y, double speed, int health, double strength)
 {
 	this->x = x;
 	this->y = y;
-	this->width = width;
-	this->height = height;
 	this->speed = speed;
 	this->health = health;
 	this->strength = strength;

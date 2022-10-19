@@ -9,6 +9,7 @@
 #include <iostream>
 #include "tinyxml.h"
 #include "Enemy.h"
+#include "Skeleton.h"
 #include "Player.h"
 #include "Entity.h"
 
@@ -50,8 +51,8 @@ private:
 public:
 	Level(String fileNameTMX)
 	{
-		this->player = new Player(0, 0);
-		player->GetPlayerView().reset(FloatRect(0, 0, 640, 480));
+		//this->player = new Player(0, 0);
+		//player->GetPlayerView().reset(FloatRect(0, 0, 640, 480));
 		this->fileNameTMX = "Levels/" + fileNameTMX;
 		LoadFromFile(this->fileNameTMX);
 	};

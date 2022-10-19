@@ -3,7 +3,7 @@
 
 class Mushroom : public Enemy
 {
-	Mushroom(double x, double y, double width, double height, double speed, int health, double strength) : Enemy(x, y, width, height, speed, health, strength)
+	Mushroom(double x, double y, double speed, int health, double strength) : Enemy(x, y, speed, health, strength)
 	{
 		this->directory = "Enemies/Mushroom/";
 	};

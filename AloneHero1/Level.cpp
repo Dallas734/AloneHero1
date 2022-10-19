@@ -259,6 +259,21 @@ bool Level::LoadFromFile(std::string filename)//двоеточия-обращение к методам кл
 		std::cout << "No object layers found..." << std::endl;
 	}
 
+	// Ищем игрока
+	Object playerObject = GetObject("Player");
+	if (player == nullptr)
+	{
+		this->player = new Player(playerObject.rect.left, playerObject.rect.top);
+		player->GetPlayerView().reset(FloatRect(0, 0, 1200, 800));
+	}
+
+	std::vector<Object> enemyObjects = GetObjects("Enemy");
+	for (int i = 0; i < enemyObjects.size(); i++)
+	{
+		Enemy* enemy = new Skeleton(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.1, 23, 23);
+		enemies.push_back(*enemy);
+	}
+
 	return true;
 }
 
@@ -296,6 +311,11 @@ sf::Vector2i Level::GetTileSize()
 void Level::Draw(sf::RenderWindow& window, float time)
 {
 	player->Update(time, window, this);
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		enemies[i].Update(time, window, this);
+		//window.draw(enemies[i].GetSprite(enemies[i].GetState()));
+	}
 
 	// Отрисовка
 	window.setView(player->GetPlayerView());
@@ -308,6 +328,10 @@ void Level::Draw(sf::RenderWindow& window, float time)
 			window.draw(layers[layer].tiles[tile]);
 
 	window.draw(player->GetSprite(player->GetState()));
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		window.draw(enemies[i].GetSprite(enemies[i].GetState()));
+	}
 	window.display();
 }
 

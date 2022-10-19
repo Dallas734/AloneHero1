@@ -12,7 +12,7 @@ int main()
     Clock clock;
 
     //  арта
-    Level lvl("map_XML.tmx");//создали экземпл€р класса уровень
+    Level lvl("map_XML_2.tmx");//создали экземпл€р класса уровень
     //lvl.LoadFromFile("Levels/map_XML.tmx");//загрузили в него карту, внутри класса с помощью методов он ее обработает.
 
     //Player player(0, 0);
