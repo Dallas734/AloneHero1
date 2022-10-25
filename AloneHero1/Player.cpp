@@ -18,14 +18,14 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 	if (onGround)
 	{
 		dy = 0;
-		CheckCollisionWithMap(0, dy, level, time);
+		//CheckCollisionWithMap(0, dy, level, time);
 		return IDLE;
 	}
 	else
 	{
 		y += dy * time;
 		dy += 0.0001 * time;
-		CheckCollisionWithMap(0, dy, level, time);
+		//CheckCollisionWithMap(0, dy, level, time);
 	}
 
 	//CheckCollisionWithMap(0, dy, level);
@@ -61,18 +61,18 @@ States Player::Fall(float time, double xBeginSprite, double yBeginSprite, double
 		this->state = FALL;
 	}
 
-	CheckCollisionWithMap(0, dy, level, time);
+	//CheckCollisionWithMap(0, dy, level, time);
 	if (onGround)
 	{
 		dy = 0;
-		CheckCollisionWithMap(0, dy, level, time);
+		//CheckCollisionWithMap(0, dy, level, time);
 		return IDLE;
 	}
 	else
 	{
 		y += dy * time;
 		dy += 0.0001 * time;
-		CheckCollisionWithMap(0, dy, level, time);
+		//CheckCollisionWithMap(0, dy, level, time);
 	}
 
 	//spriteFall.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
@@ -115,7 +115,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 			direction = RIGHT;
 			state = RUN;
 			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
-			ViewOnPlayer(x, y);
+			ViewOnPlayer(x, y, level);
 		}
 		if (state == JUMP)
 		{
@@ -135,7 +135,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 			direction = LEFT;
 			state = RUN;
 			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
-			ViewOnPlayer(x, y);
+			ViewOnPlayer(x, y, level);
 		}
 		if (state == JUMP)
 		{
@@ -153,26 +153,26 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		direction = RIGHT;
 		state = HIT;
 		Hit(time, 56, 44, 111, this->height, BUF_OF_PLAYER_HIT, 4, this->strength, direction, window);
-		ViewOnPlayer(x, y);
+		ViewOnPlayer(x, y, level);
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Left) && onGround)
 	{
 		direction = LEFT;
 		state = HIT;
 		Hit(time, 54, 44, 111, this->height, BUF_OF_PLAYER_HIT, 4, this->strength, direction, window);
-		ViewOnPlayer(x, y);
+		ViewOnPlayer(x, y, level);
 	}
 	else if (state == IDLE)
 	{
 		state = IDLE;
 		Idle(time, 56, 44, this->width, this->height, 8, direction, window, level);
-		ViewOnPlayer(x, y);
+		ViewOnPlayer(x, y, level);
 	}
 
 	if (state == FALL)
 	{
 		state = Fall(time, 56, 44, this->width, this->height, 2, direction, window, level);
-		ViewOnPlayer(x, y);
+		ViewOnPlayer(x, y, level);
 	}
 	
 
@@ -180,19 +180,45 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		state = JUMP;
 		Jump(time, 56, 44, this->width, this->height, 2, direction, window, level);
-		ViewOnPlayer(x, y);
+		ViewOnPlayer(x, y, level);
 	}
 
 }
 
-void Player::ViewOnPlayer(double x, double y)
+void Player::ViewOnPlayer(double x, double y, Level* level)
 {
 	double tempX = x;
 	double tempY = y;
+	
+	view.setSize(this->sizeOfView.x, this->sizeOfView.y);
+	//view.zoom(0.5);
+	
+	// Проверка правой границы 
+	if (tempX + this->sizeOfView.x / 2 >= level->GetWidth() * level->GetTileSize().x)
+	{
+		/*view.setCenter(tempX, tempY - 110);*/
+		tempX = level->GetWidth() * level->GetTileSize().x - this->sizeOfView.x / 2;
+	}
+	
+	// Проверка левой границы
+	if (tempX - this->sizeOfView.x / 2 <= 0)
+	{
+		tempX = this->sizeOfView.x / 2;
+	}
 
-	view.setSize(1200, 800);
-	view.zoom(0.5);
-	view.setCenter(tempX + 50, tempY);
+	// Проверка нижней границы
+	if (tempY + this->sizeOfView.y / 2 >= level->GetHeight() * level->GetTileSize().y)
+	{
+		tempY = level->GetHeight() * level->GetTileSize().y - this->sizeOfView.y / 2;
+	}
+
+	// Проверка верхней границы
+	if (tempY - this->sizeOfView.y / 2 <= 0)
+	{
+		tempY = this->sizeOfView.y / 2;
+	}
+
+	view.setCenter(tempX, tempY);
 }
 
 View Player::GetPlayerView()

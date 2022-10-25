@@ -308,6 +308,16 @@ sf::Vector2i Level::GetTileSize()
 	return sf::Vector2i(tileWidth, tileHeight);
 }
 
+int Level::GetWidth()
+{
+	return this->width;
+}
+
+int Level::GetHeight()
+{
+	return this->height;
+}
+
 void Level::Draw(sf::RenderWindow& window, float time)
 {
 	player->Update(time, window, this);

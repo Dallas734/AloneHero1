@@ -61,6 +61,8 @@ public:
 	std::vector<Object> GetAllObjects();//выдаем все объекты в наш уровень
 	void Draw(sf::RenderWindow& window, float time);//рисуем в окно
 	sf::Vector2i GetTileSize();//получаем размер тайла
+	int GetWidth();
+	int GetHeight();
 };
 #endif
 ///////////////////////////////////////
