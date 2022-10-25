@@ -15,7 +15,7 @@ Entity::Entity(double x, double y, double speed, int health, double strength)
 	this->onGround = false;
 }
 
-States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window)
+States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window, Entity* entity)
 {
 	SetSprite("Hit1.png", HIT, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.01;
