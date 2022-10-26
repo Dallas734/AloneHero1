@@ -63,6 +63,7 @@ public:
 	sf::Vector2i GetTileSize();//получаем размер тайла
 	int GetWidth();
 	int GetHeight();
+	void CheckCollision(Entity* entity);
 };
 #endif
 ///////////////////////////////////////

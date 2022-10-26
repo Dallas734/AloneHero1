@@ -208,8 +208,6 @@ C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(208,19): warnin
           [
               T=float
           ]
-  Eye.cpp
-  GreenPotion.cpp
   Level.cpp
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Level.cpp(95,18): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Level.cpp(96,24): warning C4244: =: преобразование "float" в "int", возможна потеря данных
@@ -238,7 +236,6 @@ C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Level.cpp(225,24): warning
               T=float
           ]
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Level.cpp(47,16): warning C4101: image: неиспользованная локальная переменная
-  Mushroom.cpp
   Player.cpp
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(35,112): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
           with
@@ -296,38 +293,9 @@ C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(193,31): warnin
           ]
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(221,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Player.cpp(221,17): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-  RedPotion.cpp
-C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\RedPotion.cpp(5,21): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-  Skeleton.cpp
-  SupportItem.cpp
-C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\SupportItem.cpp(13,51): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\SupportItem.cpp(13,44): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\SupportItem.cpp(13,41): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\SupportItem.cpp(13,38): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
   main.cpp
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\main.cpp(24,20): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-  tinystr.cpp
-  tinyxml.cpp
-  tinyxmlerror.cpp
-  tinyxmlparser.cpp
   Создание кода...
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Level.cpp(286): warning C4715: Level::GetObject: значение возвращается не при всех путях выполнения
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(167): warning C4715: Entity::GetSprite: значение возвращается не при всех путях выполнения
-LINK : warning LNK4199: параметр /DELAYLOAD:z игнорируется; не найдены операции импорта из z
   AloneHero1.vcxproj -> C:\Users\Aleksandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe

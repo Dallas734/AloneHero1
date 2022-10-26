@@ -318,6 +318,11 @@ int Level::GetHeight()
 	return this->height;
 }
 
+void Level::CheckCollision(Entity* entity)
+{
+
+}
+
 void Level::Draw(sf::RenderWindow& window, float time)
 {
 	player->Update(time, window, this);

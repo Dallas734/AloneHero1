@@ -57,7 +57,7 @@ class Entity
 		States GetState();
 		FloatRect getRect();
 	protected:
-		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window, Entity* entety); // Удар
+		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window); // Удар
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
