@@ -21,6 +21,8 @@ class Player : public Entity
 			this->bufWidth = 118;
 			this->sizeOfView.x = 600;
 			this->sizeOfView.y = 400;
+			this->bufOfHit = 47;
+
 		};
 		~Player() {};
 		void HelthUP(int regenerationUnits);

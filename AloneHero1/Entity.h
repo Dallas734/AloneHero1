@@ -29,6 +29,7 @@ class Entity
 		double x, y; // Координаты
 		double width, height; // Ширина и высота
 		double bufWidth; // Буферная ширина для вырезания спрайтов 
+		double bufOfHit;
 		double currentFrame; // Текущий кадр
 		int health; // Здоровье
 		double strength; // Сила
@@ -56,8 +57,24 @@ class Entity
 		void SetSprite(String fileName, States spriteName, double x, double y, double width, double height);
 		States GetState();
 		FloatRect getRect();
+		double GetDX();
+		double GetDY();
+		double GetX();
+		double GetY();
+		void SetX(double x);
+		void SetY(double y);
+		void SetDX(double dx);
+		void SetDY(double dy);
+		void SetState(States state);
+		bool GetOnGround();
+		void SetOnground(bool onGround);
+		Directions GetDirection();
+		void SetDirection(Directions direction);
+		double GetWidth();
+		double GetHeight();
+
 	protected:
-		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window); // Удар
+		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, double bufOfHit, Directions direction, RenderWindow& window, Level* level); // Удар
 		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);

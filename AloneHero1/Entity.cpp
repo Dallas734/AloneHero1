@@ -15,12 +15,17 @@ Entity::Entity(double x, double y, double speed, int health, double strength)
 	this->onGround = false;
 }
 
-States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, double buf, int frames, double strength, Directions direction, RenderWindow& window)
+States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, double bufOfHit, Directions direction, RenderWindow& window, Level* level)
 {
 	SetSprite("Hit1.png", HIT, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.01;
-	if (this->currentFrame > frames) this->currentFrame -= frames;
-
+	if (this->currentFrame > frames)
+	{
+		this->currentFrame -= frames;
+		state = RUN;
+		return RUN;
+	}
+	
 	if (direction == RIGHT)
 	{
 		spriteHit.setOrigin({ 0, 0 });
@@ -33,12 +38,9 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 		spriteHit.setScale(-1, 1);
 		this->state = HIT;
 	}
-	
-	spriteHit.setTextureRect(IntRect(xBeginSprite + (width + buf) * int(currentFrame), yBeginSprite, width, height));
+
+	spriteHit.setTextureRect(IntRect(xBeginSprite + (width + bufOfHit) * int(currentFrame), yBeginSprite, width, height));
 	spriteHit.setPosition(x, y);
-	/*window.clear();
-	window.draw(GetSprite(HIT));
-	window.display();*/
 
 	return HIT;
 }
@@ -66,27 +68,20 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 		this->state = RUN;
 	}
 	
-	//spriteMove.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
 	spriteMove.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	
 	x += dx * time;
-	CheckCollisionWithMap(dx, 0, level, time);
-	//y += dy * time;
+	level->CheckCollision(dx, 0, this);
+
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames)
 	{
 		this->currentFrame -= frames;
 	}
-	//dx = 0;
-	//dy = 0;
-	CheckCollisionWithMap(0, dy, level, time);
+
 	if (onGround)
 	{
-		//dy = 0;
 		spriteMove.setPosition(x, y);
-		/*window.clear();
-		window.draw(GetSprite(RUN));
-		window.display();*/
 	}
 
 	dx = 0;
@@ -115,18 +110,9 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 		spriteIdle.setScale(-1, 1);
 		this->state = IDLE;
 	}
-	//dx = 0;
-	//dy = 0;
-
 	
-	//spriteIdle.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
 	spriteIdle.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	
-	/*spriteIdle.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));*/
 	spriteIdle.setPosition(x, y);
-	/*window.clear();
-	window.draw(GetSprite(IDLE));
-	window.display();*/
 
 	return IDLE;
 }
@@ -169,7 +155,6 @@ Sprite Entity::GetSprite(States spriteName)
 void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, double yBeginSprite, double width, double height)
 {
 	image.loadFromFile("Images/" + this->directory + fileName);
-	//image.loadFromFile("Images/Player/" + fileName);
 	texture.loadFromImage(image);
 
 	switch (spriteName)
@@ -206,4 +191,79 @@ States Entity::GetState()
 FloatRect Entity::getRect()
 {
 	return FloatRect(x, y, width, height);
+}
+
+double Entity::GetDX()
+{
+	return this->dx;
+}
+
+double Entity::GetDY()
+{
+	return this->dy;
+}
+
+double Entity::GetX()
+{
+	return this->x;
+}
+
+double Entity::GetY()
+{
+	return this->y;
+}
+
+void Entity::SetX(double x)
+{
+	this->x = x;
+}
+
+void Entity::SetY(double y)
+{
+	this->y = y;
+}
+
+void Entity::SetDX(double dx)
+{
+	this->dx = dx;
+}
+
+void Entity::SetDY(double dy)
+{
+	this->dy = dy;
+}
+
+void Entity::SetState(States state)
+{
+	this->state = state;
+}
+
+bool Entity::GetOnGround()
+{
+	return this->onGround;
+}
+
+void Entity::SetOnground(bool onGround)
+{
+	this->onGround = onGround;
+}
+
+Directions Entity::GetDirection()
+{
+	return this->direction;
+}
+
+void Entity::SetDirection(Directions direction)
+{
+	this->direction = direction;
+}
+
+double Entity::GetWidth()
+{
+	return this->width;
+}
+
+double Entity::GetHeight()
+{
+	return this->height;
 }

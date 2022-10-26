@@ -318,9 +318,63 @@ int Level::GetHeight()
 	return this->height;
 }
 
-void Level::CheckCollision(Entity* entity)
+void Level::CheckCollision(double dx, double dy, Entity* entity)
 {
+	std::vector<Object> obj = this->GetAllObjects();
+	for (int i = 0; i < obj.size(); i++)
+	{
+		if (entity->getRect().intersects(obj[i].rect))
+		{
+			if (obj[i].name == "Solid" )
+			{
+				if (dy > 0) {
+					entity->SetY(obj[i].rect.top - entity->GetHeight());
+					entity->SetDY(0); // Для анимации
+					if (typeid(*(entity)) == typeid(Enemy))
+					{
+						entity->SetState(RUN);
+						//entity->SetState(HIT);
+					}
+					else
+					{
+						entity->SetState(IDLE);
+					}
+					entity->SetOnground(true);
+				}
+				if (dy < 0) 
+				{ 
+					entity->SetY(obj[i].rect.top + obj[i].rect.height); /*this->dy = 0;*/ std::cout << "I'm minus!"; 
+				}
+				if (dx > 0) 
+				{ 
+					entity->SetX(obj[i].rect.left - entity->GetWidth()); 
+				}
+				if (dx < 0)
+				{ 
+					entity->SetX(obj[i].rect.left + obj[i].rect.width);
+				}
+			}
+			
+			if (obj[i].name == "enemyBarier"  && typeid(*(entity)) == typeid(Enemy))
+			{
+			if (entity->GetDirection() == RIGHT) entity->SetDirection(LEFT);
+			else entity->SetDirection(RIGHT);
+			}
+		}
 
+		// Если враг пересекается с игроком
+		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()))
+		{
+			entity->SetState(HIT);
+
+			return;
+		}
+		//else if ((typeid(*(entity)) == typeid(Enemy)) && entity->GetState() != FALL)
+		//{
+		//	entity->SetState(RUN);
+		//	//entity->SetState(HIT);
+		//}
+	}
 }
 
 void Level::Draw(sf::RenderWindow& window, float time)

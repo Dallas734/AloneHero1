@@ -10,7 +10,11 @@ class Enemy : public Entity
 		int countFramesOfIdle;
 		double xBeginSprite;
 		double yBeginSprite;
+		double xBeginSpriteHit;
+		double yBeginSpriteHit;
 		double bufOfHit;
+		double widthOfHit;
+		double heightOfHit;
 
 	public:
 		Enemy(double x, double y, double speed, int health, double strength) : Entity(x, y, speed, health, strength)

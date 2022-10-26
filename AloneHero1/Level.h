@@ -12,6 +12,7 @@
 #include "Skeleton.h"
 #include "Player.h"
 #include "Entity.h"
+#include <typeinfo>
 
 struct Object
 {
@@ -63,7 +64,7 @@ public:
 	sf::Vector2i GetTileSize();//получаем размер тайла
 	int GetWidth();
 	int GetHeight();
-	void CheckCollision(Entity* entity);
+	void CheckCollision(double dx, double dy, Entity* entity);
 };
 #endif
 ///////////////////////////////////////

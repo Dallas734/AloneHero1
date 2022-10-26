@@ -3,14 +3,15 @@
 
 void Enemy::Update(float time, RenderWindow& window, Level* level)
 {
-	if (onGround && dy == 0 && state != IDLE)
+	/*if (dy == 0 && state != RUN)
 	{
 		onGround = false;
 		dy += 0.0001 * time;
-	}
+	}*/
 
 	y += dy * time;
-	CheckCollisionWithMap(0, dy, level, time);
+	//CheckCollisionWithMap(0, dy, level, time);
+	level->CheckCollision(0, dy, this);
 
 	//Idle(time, xBeginSprite, yBeginSprite, width, height, countFramesOfIdle, direction, window, level);
 
@@ -18,10 +19,25 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	{
 		state = Fall(time, xBeginSprite, yBeginSprite, width, height, countFramesOfIdle, direction, window, level);
 	}
+
 	if (state == RUN)
 	{
 		Move(time, xBeginSprite, yBeginSprite, width, height, countFramesOfMove, direction, window, level);
+		//Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, countFramesOfHit, strength, bufOfHit, direction, window, level);
+		level->CheckCollision(0, dy, this);
 	}
+
+	if (state == HIT)
+	{
+		
+		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, countFramesOfHit, strength, bufOfHit, direction, window, level);
+		/*if (int(currentFrame) == 8)
+		{
+			state = RUN;
+		}*/
+	}
+
+
 }
 
 void Enemy::CheckCollisionWithMap(double dx, double dy, Level* level, float time)
@@ -72,19 +88,22 @@ States Enemy::Fall(float time, double xBeginSprite, double yBeginSprite, double 
 		this->state = FALL;
 	}
 
-	CheckCollisionWithMap(0, dy, level, time);
+	//CheckCollisionWithMap(0, dy, level, time);
+	level->CheckCollision(0, dy, this);
 
 	if (onGround)
 	{
 		dy = 0;
-		CheckCollisionWithMap(0, dy, level, time);
+		//CheckCollisionWithMap(0, dy, level, time);
+		//level->CheckCollision(0, dy, this);
 		return IDLE;
 	}
 	else
 	{
 		y += dy * time;
 		dy += 0.0001 * time;
-		CheckCollisionWithMap(0, dy, level, time);
+		//CheckCollisionWithMap(0, dy, level, time);
+		//level->CheckCollision(0, dy, this);
 	}
 
 	//spriteFall.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
