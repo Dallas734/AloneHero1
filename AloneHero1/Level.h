@@ -49,6 +49,9 @@ private:
 	std::vector<Object> objects;//массив типа Объекты, который мы создали
 	std::vector<Layer> layers;
 	bool LoadFromFile(std::string fileNameTMX);//возвращает false если не получилось загрузить
+	bool collisionWithPlayer;
+	View view;
+	sf::Vector2i sizeOfView;
 public:
 	Level(String fileNameTMX)
 	{
@@ -56,6 +59,9 @@ public:
 		//player->GetPlayerView().reset(FloatRect(0, 0, 640, 480));
 		this->fileNameTMX = "Levels/" + fileNameTMX;
 		LoadFromFile(this->fileNameTMX);
+		collisionWithPlayer = false;
+		this->sizeOfView.x = 600;
+		this->sizeOfView.y = 400;
 	};
 	Object GetObject(std::string name);
 	std::vector<Object> GetObjects(std::string name);//выдаем объект в наш уровень
@@ -65,6 +71,8 @@ public:
 	int GetWidth();
 	int GetHeight();
 	void CheckCollision(double dx, double dy, Entity* entity);
+	bool GetCollisionWithPlayer();
+	void ViewOnPlayer(Player* player);
 };
 #endif
 ///////////////////////////////////////

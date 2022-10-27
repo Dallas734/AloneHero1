@@ -264,7 +264,7 @@ bool Level::LoadFromFile(std::string filename)//двоеточия-обращение к методам кл
 	if (player == nullptr)
 	{
 		this->player = new Player(playerObject.rect.left, playerObject.rect.top);
-		player->GetPlayerView().reset(FloatRect(0, 0, 1200, 800));
+		view.reset(FloatRect(0, 0, 1200, 800));
 	}
 
 	std::vector<Object> enemyObjects = GetObjects("Enemy");
@@ -362,19 +362,79 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 			}
 		}
 
+		//////////////////////////////////////////////////////////////////////
+		
 		// Если враг пересекается с игроком
-		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()))
+		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0)
 		{
+			collisionWithPlayer = true;
 			entity->SetState(HIT);
-
+			player->SetState(DAMAGE);
 			return;
 		}
+		else if (/*!entity->getRect().intersects(player->getRect()) && */collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
+		{
+			if (!entity->getRect().intersects(player->getRect()))
+			{
+			collisionWithPlayer = false;
+			}
+			if (collisionWithPlayer && player->GetState() != RUN)
+				player->SetState(IDLE);
+		}
+
+		////////////////////////////////////////////////////////////////////////
+
+		// Если игрок пересекает врага при ударе.
+
+		/*if (collisionWithPlayer)
+		{
+			player->SetState(IDLE);
+		}*/
 		//else if ((typeid(*(entity)) == typeid(Enemy)) && entity->GetState() != FALL)
 		//{
 		//	entity->SetState(RUN);
 		//	//entity->SetState(HIT);
 		//}
 	}
+}
+
+bool Level::GetCollisionWithPlayer()
+{
+	return this->collisionWithPlayer;
+}
+
+void Level::ViewOnPlayer(Player* player)
+{
+	double tempX = player->GetX();
+	double tempY = player->GetY();
+
+	view.setSize(this->sizeOfView.x, this->sizeOfView.y);
+
+	// Проверка правой границы 
+	if (tempX + this->sizeOfView.x / 2 >= this->width * this->tileWidth)
+	{
+		tempX = this->width * this->tileWidth - this->sizeOfView.x / 2;
+	}
+
+	// Проверка левой границы
+	if (tempX - this->sizeOfView.x / 2 <= 0)
+	{
+		tempX = this->sizeOfView.x / 2;
+	}
+
+	// Проверка нижней границы
+	if (tempY + this->sizeOfView.y / 2 >= this->height * this->tileHeight)
+	{
+		tempY = this->height * this->tileHeight - this->sizeOfView.y / 2;
+	}
+
+	// Проверка верхней границы
+	if (tempY - this->sizeOfView.y / 2 <= 0)
+	{
+		tempY = this->sizeOfView.y / 2;
+	}
+
+	view.setCenter(tempX, tempY);
 }
 
 void Level::Draw(sf::RenderWindow& window, float time)
@@ -387,7 +447,7 @@ void Level::Draw(sf::RenderWindow& window, float time)
 	}
 
 	// Отрисовка
-	window.setView(player->GetPlayerView());
+	window.setView(view);
 
 	window.clear();
 

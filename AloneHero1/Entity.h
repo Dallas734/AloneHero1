@@ -41,6 +41,7 @@ class Entity
 		Sprite spriteHit; // Спрайт удара
 		Sprite spriteJump;
 		Sprite spriteFall;
+		Sprite spriteDamage;
 		States state;
 		Image image; // Картинка для создания спрайтов
 		Texture texture; // Текстура для создания спрайтов
@@ -75,7 +76,7 @@ class Entity
 
 	protected:
 		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, double bufOfHit, Directions direction, RenderWindow& window, Level* level); // Удар
-		void Damage(float time, double width, double height, int frames, double strength, Directions direction); // Получение урона
+		void Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window, Level* level); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 		virtual void CheckCollisionWithMap(double dx, double dy, Level* level, float time) = 0;

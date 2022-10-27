@@ -45,8 +45,31 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	return HIT;
 }
 
-void Entity::Damage(float time, double width, double height, int frames, double strength, Directions direction)
+void Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window, Level* level)
 {
+	SetSprite("Damage.png", DAMAGE, xBeginSprite, yBeginSprite, width, height);
+	currentFrame += time * 0.005;
+	if (this->currentFrame > frames)
+	{
+		this->currentFrame -= frames;
+	}
+
+	if (direction == RIGHT)
+	{
+		spriteDamage.setOrigin({ 0, 0 });
+		spriteDamage.setScale(1, 1);
+		this->state = DAMAGE;
+	}
+	else if (direction == LEFT)
+	{
+		spriteDamage.setOrigin({ spriteDamage.getLocalBounds().width, 0 });
+		spriteDamage.setScale(-1, 1);
+		this->state = DAMAGE;
+	}
+
+	spriteDamage.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	spriteDamage.setPosition(x, y);
+
 }
 
 States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
@@ -139,6 +162,7 @@ Sprite Entity::GetSprite(States spriteName)
 		return spriteMove;
 		break;
 	case DAMAGE:
+		return spriteDamage;
 		break;
 	case HIT:
 		return spriteHit;
@@ -168,6 +192,8 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 		spriteMove.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case DAMAGE:
+		spriteDamage.setTexture(texture);
+		spriteDamage.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case HIT:
 		spriteHit.setTexture(texture);

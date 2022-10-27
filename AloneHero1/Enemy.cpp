@@ -31,6 +31,11 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	{
 		
 		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, countFramesOfHit, strength, bufOfHit, direction, window, level);
+		/*if (level->GetCollisionWithPlayer())
+		{
+			if (direction == RIGHT) direction = LEFT;
+			else direction = RIGHT;
+		}*/
 		/*if (int(currentFrame) == 8)
 		{
 			state = RUN;

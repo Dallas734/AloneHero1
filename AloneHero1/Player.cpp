@@ -98,7 +98,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	std::cout << dy;
 
 	// Уровень земли и падение
-	if (dy == 0 && state != IDLE)
+	if (dy == 0 && state != IDLE && state != DAMAGE)
 	{
 		state = FALL;
 		onGround = false;
@@ -117,7 +117,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 			direction = RIGHT;
 			state = RUN;
 			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
-			ViewOnPlayer(x, y, level);
+			//ViewOnPlayer(x, y, level);
+			level->ViewOnPlayer(this);
 		}
 		if (state == JUMP)
 		{
@@ -138,7 +139,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 			direction = LEFT;
 			state = RUN;
 			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
-			ViewOnPlayer(x, y, level);
+			// ViewOnPlayer(x, y, level);
+			level->ViewOnPlayer(this);
 		}
 		if (state == JUMP)
 		{
@@ -157,77 +159,90 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		direction = RIGHT;
 		state = HIT;
 		Hit(time, 56, 44, 111, this->height, 4, this->strength, this->bufOfHit, direction, window, level);
-		ViewOnPlayer(x, y, level);
+		// ViewOnPlayer(x, y, level);
+		level->ViewOnPlayer(this);
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Left) && onGround)
 	{
 		direction = LEFT;
 		state = HIT;
 		Hit(time, 54, 44, 111, this->height, 4, this->strength, this->bufOfHit, direction, window, level);
-		ViewOnPlayer(x, y, level);
+		// ViewOnPlayer(x, y, level);
+		level->ViewOnPlayer(this);
 	}
 	else if (state == IDLE)
 	{
 		state = IDLE;
 		Idle(time, 56, 44, this->width, this->height, 8, direction, window, level);
-		ViewOnPlayer(x, y, level);
+		// ViewOnPlayer(x, y, level);
+		level->ViewOnPlayer(this);
 	}
 
 	if (state == FALL)
 	{
 		state = Fall(time, 56, 44, this->width, this->height, 2, direction, window, level);
-		ViewOnPlayer(x, y, level);
+		// ViewOnPlayer(x, y, level);
+		level->ViewOnPlayer(this);
 	}
 	
-	if (((Keyboard::isKeyPressed(Keyboard::Space) && onGround) || (!onGround && state == JUMP)) && state != HIT)
+	if (state == DAMAGE)
+	{
+		state = DAMAGE;
+		Damage(time, 56, 44, this->width, this->height, 4, this->strength, direction, window, level);
+		// ViewOnPlayer(x, y, level);
+		level->ViewOnPlayer(this);
+	}
+
+	if (((Keyboard::isKeyPressed(Keyboard::Space) && onGround) || (!onGround && state == JUMP)) && state != HIT && state != DAMAGE)
 	{
 		state = JUMP;
 		Jump(time, 56, 44, this->width, this->height, 2, direction, window, level);
-		ViewOnPlayer(x, y, level);
+		// ViewOnPlayer(x, y, level);
+		level->ViewOnPlayer(this);
 	}
 
 }
 
-void Player::ViewOnPlayer(double x, double y, Level* level)
-{
-	double tempX = x;
-	double tempY = y;
-	
-	view.setSize(this->sizeOfView.x, this->sizeOfView.y);
-	//view.zoom(0.5);
-	
-	// Проверка правой границы 
-	if (tempX + this->sizeOfView.x / 2 >= level->GetWidth() * level->GetTileSize().x)
-	{
-		/*view.setCenter(tempX, tempY - 110);*/
-		tempX = level->GetWidth() * level->GetTileSize().x - this->sizeOfView.x / 2;
-	}
-	
-	// Проверка левой границы
-	if (tempX - this->sizeOfView.x / 2 <= 0)
-	{
-		tempX = this->sizeOfView.x / 2;
-	}
+//void Player::ViewOnPlayer(double x, double y, Level* level)
+//{
+//	double tempX = x;
+//	double tempY = y;
+//	
+//	view.setSize(this->sizeOfView.x, this->sizeOfView.y);
+//	//view.zoom(0.5);
+//	
+//	// Проверка правой границы 
+//	if (tempX + this->sizeOfView.x / 2 >= level->GetWidth() * level->GetTileSize().x)
+//	{
+//		/*view.setCenter(tempX, tempY - 110);*/
+//		tempX = level->GetWidth() * level->GetTileSize().x - this->sizeOfView.x / 2;
+//	}
+//	
+//	// Проверка левой границы
+//	if (tempX - this->sizeOfView.x / 2 <= 0)
+//	{
+//		tempX = this->sizeOfView.x / 2;
+//	}
+//
+//	// Проверка нижней границы
+//	if (tempY + this->sizeOfView.y / 2 >= level->GetHeight() * level->GetTileSize().y)
+//	{
+//		tempY = level->GetHeight() * level->GetTileSize().y - this->sizeOfView.y / 2;
+//	}
+//
+//	// Проверка верхней границы
+//	if (tempY - this->sizeOfView.y / 2 <= 0)
+//	{
+//		tempY = this->sizeOfView.y / 2;
+//	}
+//
+//	view.setCenter(tempX, tempY);
+//}
 
-	// Проверка нижней границы
-	if (tempY + this->sizeOfView.y / 2 >= level->GetHeight() * level->GetTileSize().y)
-	{
-		tempY = level->GetHeight() * level->GetTileSize().y - this->sizeOfView.y / 2;
-	}
-
-	// Проверка верхней границы
-	if (tempY - this->sizeOfView.y / 2 <= 0)
-	{
-		tempY = this->sizeOfView.y / 2;
-	}
-
-	view.setCenter(tempX, tempY);
-}
-
-View Player::GetPlayerView()
-{
-	return this->view;
-}
+//View Player::GetPlayerView()
+//{
+//	return this->view;
+//}
 
 void Player::CheckCollisionWithMap(double dx, double dy, Level* level, float time)
 {
