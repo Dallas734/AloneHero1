@@ -203,67 +203,6 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 
 }
 
-//void Player::ViewOnPlayer(double x, double y, Level* level)
-//{
-//	double tempX = x;
-//	double tempY = y;
-//	
-//	view.setSize(this->sizeOfView.x, this->sizeOfView.y);
-//	//view.zoom(0.5);
-//	
-//	// Проверка правой границы 
-//	if (tempX + this->sizeOfView.x / 2 >= level->GetWidth() * level->GetTileSize().x)
-//	{
-//		/*view.setCenter(tempX, tempY - 110);*/
-//		tempX = level->GetWidth() * level->GetTileSize().x - this->sizeOfView.x / 2;
-//	}
-//	
-//	// Проверка левой границы
-//	if (tempX - this->sizeOfView.x / 2 <= 0)
-//	{
-//		tempX = this->sizeOfView.x / 2;
-//	}
-//
-//	// Проверка нижней границы
-//	if (tempY + this->sizeOfView.y / 2 >= level->GetHeight() * level->GetTileSize().y)
-//	{
-//		tempY = level->GetHeight() * level->GetTileSize().y - this->sizeOfView.y / 2;
-//	}
-//
-//	// Проверка верхней границы
-//	if (tempY - this->sizeOfView.y / 2 <= 0)
-//	{
-//		tempY = this->sizeOfView.y / 2;
-//	}
-//
-//	view.setCenter(tempX, tempY);
-//}
 
-//View Player::GetPlayerView()
-//{
-//	return this->view;
-//}
 
-void Player::CheckCollisionWithMap(double dx, double dy, Level* level, float time)
-{
-	std::vector<Object> obj = level->GetAllObjects();
-	for (int i = 0; i < obj.size(); i++)
-	{
-		if (getRect().intersects(obj[i].rect))
-		{
-			if (obj[i].name == "Solid")
-			{
-				if (dy > 0) {
-					y = obj[i].rect.top - height;
-					this->dy = 0; // Для анимации
-					state = IDLE;
-					onGround = true;
-				}
-				if (dy < 0) { y = obj[i].rect.top + obj[i].rect.height; /*this->dy = 0;*/ std::cout << "I'm minus!"; }
-				if (dx > 0) { x = obj[i].rect.left - width; }
-				if (dx < 0) { x = obj[i].rect.left + obj[i].rect.width; }
-			}
-		}
-	}
-}
 

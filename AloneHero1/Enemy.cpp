@@ -45,35 +45,6 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 
 }
 
-void Enemy::CheckCollisionWithMap(double dx, double dy, Level* level, float time)
-{
-	std::vector<Object> obj = level->GetAllObjects();
-	for (int i = 0; i < obj.size(); i++)
-	{
-		if (getRect().intersects(obj[i].rect))
-		{
-			if (obj[i].name == "enemyBarier")
-			{
-				if (direction == RIGHT) direction = LEFT;
-				else direction = RIGHT;
-			}
-			else if (obj[i].name == "Solid")
-			{
-				if (dy > 0) {
-					y = obj[i].rect.top - height;
-					this->dy = 0; // Для анимации
-					state = RUN;
-					onGround = true;
-				}
-				if (dy < 0) { y = obj[i].rect.top + obj[i].rect.height; /*this->dy = 0;*/ std::cout << "I'm minus!"; }
-				if (dx > 0) { x = obj[i].rect.left - width; }
-				if (dx < 0) { x = obj[i].rect.left + obj[i].rect.width; }
-			}
-			//else if (obj[i].name == )
-		}
-	}
-}
-
 States Enemy::Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
 {
 	SetSprite("Idle.png", IDLE, xBeginSprite, yBeginSprite, width, height);

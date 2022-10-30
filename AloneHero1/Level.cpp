@@ -378,7 +378,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 			{
 			collisionWithPlayer = false;
 			}
-			if (collisionWithPlayer && player->GetState() != RUN)
+			if (collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
 				player->SetState(IDLE);
 		}
 
@@ -386,15 +386,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 
 		// ≈сли игрок пересекает врага при ударе.
 
-		/*if (collisionWithPlayer)
-		{
-			player->SetState(IDLE);
-		}*/
-		//else if ((typeid(*(entity)) == typeid(Enemy)) && entity->GetState() != FALL)
-		//{
-		//	entity->SetState(RUN);
-		//	//entity->SetState(HIT);
-		//}
+		
 	}
 }
 

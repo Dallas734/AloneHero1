@@ -25,7 +25,6 @@ class Player : public Entity
 		void StrengthUP();
 		void SpeedUp(double improveUnits);
 		void Update(float time, RenderWindow& window, Level* level) override;
-		void CheckCollisionWithMap(double dx, double dy, Level* level, float time) override;
 	private:
 		States Jump(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 		States Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level) override;

@@ -79,6 +79,5 @@ class Entity
 		void Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window, Level* level); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
-		virtual void CheckCollisionWithMap(double dx, double dy, Level* level, float time) = 0;
 };
 
