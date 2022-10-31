@@ -35,6 +35,17 @@ class Entity
 		double strength; // Сила
 		bool onGround;
 
+		double xBeginSprite;
+		double yBeginSprite;
+		double widthOfHit;
+		int countFramesOfMove;
+		int countFramesOfIdle;
+		int countFramesOfHit;
+		int countFramesOfDamage;
+		double heightOfHit;
+		double xBeginSpriteHit;
+		double yBeginSpriteHit;
+
 		String directory; // Имя директории, где хранятся анимации
 		Sprite spriteMove; // Спрайт движения
 		Sprite spriteIdle; // Спрайт статичного состояния

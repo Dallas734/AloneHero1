@@ -116,7 +116,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			direction = RIGHT;
 			state = RUN;
-			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
+			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, 8, direction, window, level);
 			//ViewOnPlayer(x, y, level);
 			level->ViewOnPlayer(this);
 		}
@@ -138,7 +138,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			direction = LEFT;
 			state = RUN;
-			Move(time, 56, 44, this->width, this->height, 8, direction, window, level);
+			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, 8, direction, window, level);
 			// ViewOnPlayer(x, y, level);
 			level->ViewOnPlayer(this);
 		}
@@ -158,7 +158,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		direction = RIGHT;
 		state = HIT;
-		Hit(time, 56, 44, 111, this->height, 4, this->strength, this->bufOfHit, direction, window, level);
+		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, 4, this->strength, this->bufOfHit, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
@@ -166,21 +166,21 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		direction = LEFT;
 		state = HIT;
-		Hit(time, 54, 44, 111, this->height, 4, this->strength, this->bufOfHit, direction, window, level);
+		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, 4, this->strength, this->bufOfHit, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 	else if (state == IDLE)
 	{
 		state = IDLE;
-		Idle(time, 56, 44, this->width, this->height, 8, direction, window, level);
+		Idle(time, xBeginSprite, yBeginSprite, this->width, this->height, 8, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 
 	if (state == FALL)
 	{
-		state = Fall(time, 56, 44, this->width, this->height, 2, direction, window, level);
+		state = Fall(time, xBeginSprite, yBeginSprite, this->width, this->height, 2, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
@@ -188,7 +188,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (state == DAMAGE)
 	{
 		state = DAMAGE;
-		Damage(time, 56, 44, this->width, this->height, 4, this->strength, direction, window, level);
+		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, 4, this->strength, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
@@ -196,7 +196,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (((Keyboard::isKeyPressed(Keyboard::Space) && onGround) || (!onGround && state == JUMP)) && state != HIT && state != DAMAGE)
 	{
 		state = JUMP;
-		Jump(time, 56, 44, this->width, this->height, 2, direction, window, level);
+		Jump(time, xBeginSprite, yBeginSprite, this->width, this->height, 2, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}

@@ -4,18 +4,6 @@
 
 class Enemy : public Entity
 {
-	protected:
-		int countFramesOfMove;
-		int countFramesOfHit;
-		int countFramesOfIdle;
-		double xBeginSprite;
-		double yBeginSprite;
-		double xBeginSpriteHit;
-		double yBeginSpriteHit;
-		double bufOfHit;
-		double widthOfHit;
-		double heightOfHit;
-
 	public:
 		Enemy(double x, double y, double speed, int health, double strength) : Entity(x, y, speed, health, strength)
 		{

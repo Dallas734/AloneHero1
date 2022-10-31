@@ -17,12 +17,12 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 
 	if (state == FALL)
 	{
-		state = Fall(time, xBeginSprite, yBeginSprite, width, height, countFramesOfIdle, direction, window, level);
+		state = Fall(time, xBeginSprite, yBeginSprite, width, height, this->countFramesOfIdle, direction, window, level);
 	}
 
 	if (state == RUN)
 	{
-		Move(time, xBeginSprite, yBeginSprite, width, height, countFramesOfMove, direction, window, level);
+		Move(time, xBeginSprite, yBeginSprite, width, height, this->countFramesOfMove, direction, window, level);
 		//Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, countFramesOfHit, strength, bufOfHit, direction, window, level);
 		level->CheckCollision(0, dy, this);
 	}
@@ -30,7 +30,7 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	if (state == HIT)
 	{
 		
-		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, countFramesOfHit, strength, bufOfHit, direction, window, level);
+		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, this->countFramesOfHit, strength, bufOfHit, direction, window, level);
 		/*if (level->GetCollisionWithPlayer())
 		{
 			if (direction == RIGHT) direction = LEFT;

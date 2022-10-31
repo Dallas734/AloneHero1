@@ -365,7 +365,11 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 		//////////////////////////////////////////////////////////////////////
 		
 		// Если враг пересекается с игроком
-		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0)
+		if (player->GetState() == HIT && entity->getRect().intersects(player->getRect()))
+		{
+			int a = 1;
+		}
+		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && (entity->GetDirection() == player->GetDirection() + 1 || entity->GetDirection() + 1 == player->GetDirection()) && player->GetState() != HIT)
 		{
 			collisionWithPlayer = true;
 			entity->SetState(HIT);
@@ -386,7 +390,33 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 
 		// Если игрок пересекает врага при ударе.
 
-		
+		//for (int i = 0; i < enemies.size(); i++)
+		//{
+		//	Enemy enemy = enemies[i];
+		//	if (typeid(*(entity)) == typeid(Player) && player->getRect().intersects(enemy.getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT)
+		//	{
+		//		collisionWithPlayer = true;
+		//		enemy.SetState(DAMAGE);
+
+		//		//enemy.~Enemy();
+		//		return;
+		//	}
+		//	else if (collisionWithPlayer && enemy.GetState() == RUN && player->GetDY() == 0)
+		//	{
+		//		if (!player->getRect().intersects(enemy.getRect()))
+		//		{
+		//			collisionWithPlayer = false;
+		//		}
+		//		if (collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
+		//		{
+		//			enemy.SetState(RUN);
+		//		}
+
+		//		//enemy.~Enemy();
+		//		return;
+		//	}
+		//	//enemy.~Enemy();
+		//}
 	}
 }
 
