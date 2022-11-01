@@ -21,7 +21,7 @@ class Player : public Entity
 			this->bufOfHit = 47;
 			this->xBeginSprite = 56;
 			this->yBeginSprite = 44;
-			this->widthOfHit = 111;
+			this->widthOfHit = 109;
 			this->countFramesOfMove = 8;
 			this->countFramesOfIdle = 8;
 			this->countFramesOfHit = 4;

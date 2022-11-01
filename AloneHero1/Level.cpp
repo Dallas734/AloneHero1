@@ -369,7 +369,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 		{
 			int a = 1;
 		}*/
-		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && (entity->GetDirection() == player->GetDirection() + 1 || entity->GetDirection() + 1 == player->GetDirection()) && player->GetState() != HIT)
+		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
 		{
 			collisionWithPlayer = true;
 			entity->SetState(HIT);
@@ -404,7 +404,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 				enemy->SetState(DAMAGE);
 				return;
 			}
-			else if (collisionWithPlayer && enemy->GetState() == RUN && player->GetDY() == 0)
+			else if (collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0)
 			{
 				if (!player->getRect().intersects(enemy->getRect()))
 				{
