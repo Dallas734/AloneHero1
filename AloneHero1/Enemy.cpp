@@ -18,6 +18,7 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	if (state == FALL)
 	{
 		state = Fall(time, xBeginSprite, yBeginSprite, width, height, this->countFramesOfIdle, direction, window, level);
+		//level->CheckCollision(0, dy, this);
 	}
 
 	if (state == RUN)
@@ -40,6 +41,12 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 		{
 			state = RUN;
 		}*/
+		//level->CheckCollision(0, dy, this);
+	}
+
+	if (state == DAMAGE)
+	{
+		Damage(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDamage, strength, direction, window, level);
 	}
 
 
@@ -65,7 +72,7 @@ States Enemy::Fall(float time, double xBeginSprite, double yBeginSprite, double 
 	}
 
 	//CheckCollisionWithMap(0, dy, level, time);
-	level->CheckCollision(0, dy, this);
+	//level->CheckCollision(0, dy, this);
 
 	if (onGround)
 	{

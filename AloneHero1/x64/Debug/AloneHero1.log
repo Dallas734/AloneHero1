@@ -26,17 +26,18 @@ C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(225,24): warning 
               T=float
           ]
 C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(47,16): warning C4101: image: неиспользованная локальная переменная
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(433,51): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(398,25): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(437,51): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(433,31): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(437,31): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(459,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(459,17): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(463,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(463,17): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
 C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(286): warning C4715: Level::GetObject: значение возвращается не при всех путях выполнения
   AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe

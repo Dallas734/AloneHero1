@@ -42,6 +42,7 @@ class Entity
 		int countFramesOfIdle;
 		int countFramesOfHit;
 		int countFramesOfDamage;
+		int countFramesOfFall;
 		double heightOfHit;
 		double xBeginSpriteHit;
 		double yBeginSpriteHit;
@@ -69,6 +70,7 @@ class Entity
 		void SetSprite(String fileName, States spriteName, double x, double y, double width, double height);
 		States GetState();
 		FloatRect getRect();
+		FloatRect getHitRect();
 		double GetDX();
 		double GetDY();
 		double GetX();

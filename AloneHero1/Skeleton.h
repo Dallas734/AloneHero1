@@ -16,6 +16,7 @@ class Skeleton : public Enemy
 			this->countFramesOfMove = 4;
 			this->countFramesOfIdle = 4;
 			this->countFramesOfHit = 8;
+			this->countFramesOfDamage = 4;
 			this->bufOfHit = 40;
 			this->heightOfHit = 61;
 			this->xBeginSpriteHit = 49;

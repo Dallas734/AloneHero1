@@ -28,6 +28,7 @@ class Player : public Entity
 			this->countFramesOfDamage = 4;
 			this->countFramesOfJump = 2;
 			this->countFramesOfIdle = 8;
+			this->countFramesOfFall = 2;
 
 		};
 		~Player() {};

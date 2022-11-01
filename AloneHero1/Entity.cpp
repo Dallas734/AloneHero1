@@ -234,6 +234,11 @@ double Entity::GetX()
 	return this->x;
 }
 
+FloatRect Entity::getHitRect()
+{
+	return FloatRect(x, y, widthOfHit, height);;
+}
+
 double Entity::GetY()
 {
 	return this->y;
