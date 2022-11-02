@@ -40,7 +40,7 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	}
 
 	spriteHit.setTextureRect(IntRect(xBeginSprite + (width + bufOfHit) * int(currentFrame), yBeginSprite, width, height));
-	spriteHit.setPosition(x, y);
+	spriteHit.setPosition(this->x, this->y);
 
 	return HIT;
 }
@@ -93,7 +93,7 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	
 	spriteMove.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	
-	x += dx * time;
+	this->x += dx * time;
 	level->CheckCollision(dx, 0, this);
 
 	currentFrame += time * 0.005;
@@ -104,7 +104,7 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 
 	if (onGround)
 	{
-		spriteMove.setPosition(x, y);
+		spriteMove.setPosition(this->x, this->y);
 	}
 
 	dx = 0;
@@ -236,7 +236,14 @@ double Entity::GetX()
 
 FloatRect Entity::getHitRect()
 {
-	return FloatRect(x, y, widthOfHit, height);;
+	if (direction == RIGHT)
+	{
+		return FloatRect(x, y, widthOfHit - 25, height);
+	}
+	else 
+	{
+		return FloatRect(x, y, widthOfHit + 10, height);
+	}
 }
 
 double Entity::GetY()

@@ -404,9 +404,9 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 				enemy->SetState(DAMAGE);
 				return;
 			}
-			else if (collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0)
+			/*else if (collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0)
 			{
-				if (!player->getRect().intersects(enemy->getRect()))
+				if (!player->getHitRect().intersects(enemy->getRect()))
 				{
 					collisionWithPlayer = false;
 				}
@@ -415,7 +415,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 					enemy->SetState(RUN);
 				}
 				return;
-			}
+			}*/
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////
