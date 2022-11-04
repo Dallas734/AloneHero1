@@ -68,7 +68,7 @@ void Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double
 	}
 
 	spriteDamage.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	spriteDamage.setPosition(x, y);
+	spriteDamage.setPosition(this->x, this->y);
 
 }
 
@@ -240,9 +240,9 @@ FloatRect Entity::getHitRect()
 	{
 		return FloatRect(x, y, widthOfHit - 25, height);
 	}
-	else 
+	else if (direction == LEFT)
 	{
-		return FloatRect(x, y, widthOfHit + 10, height);
+		return FloatRect(x, y, this->widthOfHit + 100, height);
 	}
 }
 

@@ -11,30 +11,30 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 
 	if (onGround)
 	{
-		dy = -0.1; // Высота прыжка
+		this->dy = -0.1; // Высота прыжка
 		onGround = false;
 	}
 
 	if (onGround)
 	{
-		dy = 0;
+		this->dy = 0;
 		//CheckCollisionWithMap(0, dy, level, time);
 		return IDLE;
 	}
 	else
 	{
-		y += dy * time;
-		dy += 0.0001 * time;
+		this->y += dy * time;
+		this->dy += 0.0001 * time;
 		//CheckCollisionWithMap(0, dy, level, time);
 	}
 
 	//CheckCollisionWithMap(0, dy, level);
-	dx = 0;
+	this->dx = 0;
 	
 	//spriteJump.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
 	spriteJump.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	
-	spriteJump.setPosition(x, y);
+	spriteJump.setPosition(this->x, this->y);
 	/*window.clear();
 	window.draw(GetSprite(JUMP));
 	window.display();*/

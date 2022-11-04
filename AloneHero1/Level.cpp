@@ -369,53 +369,58 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 		{
 			int a = 1;
 		}*/
-		if (typeid(*(entity)) == typeid(Enemy) && entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
+		if (typeid(*(entity)) == typeid(Enemy))
 		{
-			collisionWithPlayer = true;
-			entity->SetState(HIT);
-			player->SetState(DAMAGE);
-			return;
-		}
-		else if (/*!entity->getRect().intersects(player->getRect()) && */collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
-		{
-			if (!entity->getRect().intersects(player->getRect()))
-			{
-			collisionWithPlayer = false;
-			}
-			if (collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
-				player->SetState(IDLE);
-		}
-
-		////////////////////////////////////////////////////////////////////////
-
-		// ≈сли игрок пересекает врага при ударе.
-		////////////////////////////////////////////////////////////////////////
-
-		for (int i = 0; i < enemies.size(); i++)
-		{
-			Enemy* enemy = &enemies[i];
-			if (player->GetState() == HIT && player->getHitRect().intersects(enemy->getRect()) && typeid(*(entity)) == typeid(Player))
-			{
-				collisionWithPlayer == false;
-			}
-			if (typeid(*(entity)) == typeid(Player) && player->getHitRect().intersects(enemy->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT)
+			if (entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
 			{
 				collisionWithPlayer = true;
-				enemy->SetState(DAMAGE);
+				entity->SetState(HIT);
+				player->SetState(DAMAGE);
 				return;
 			}
-			/*else if (collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0)
+			else if (/*!entity->getRect().intersects(player->getRect()) && */collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
 			{
-				if (!player->getHitRect().intersects(enemy->getRect()))
+				if (!entity->getRect().intersects(player->getRect()))
 				{
 					collisionWithPlayer = false;
 				}
 				if (collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
 				{
-					enemy->SetState(RUN);
+					player->SetState(IDLE);
 				}
 				return;
-			}*/
+			}
+		}
+		////////////////////////////////////////////////////////////////////////
+
+		// ≈сли игрок пересекает врага при ударе.
+		////////////////////////////////////////////////////////////////////////
+
+		if (typeid(*(entity)) == typeid(Player))
+		{
+			for (int i = 0; i < enemies.size(); i++)
+			{
+				Enemy* enemy = &enemies[i];
+				if (player->getHitRect().intersects(enemy->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT && enemy->GetState() != HIT && ((player->GetDirection() == LEFT && player->GetX() > enemy->GetX()) || (player->GetDirection() == RIGHT && player->GetX() < enemy->GetX())))
+				{
+					collisionWithPlayer = true;
+					enemy->SetState(DAMAGE);
+					return;
+				}
+				else if (collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
+				{
+					if (!player->getHitRect().intersects(enemy->getRect()))
+					{
+						collisionWithPlayer = false;
+					}
+					if (player->GetState() != RUN && player->GetState() != HIT)
+					{
+						enemy->SetState(RUN);
+						collisionWithPlayer = false;
+					}
+					return;
+				}
+			}
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////
