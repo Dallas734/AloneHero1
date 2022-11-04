@@ -238,11 +238,11 @@ FloatRect Entity::getHitRect()
 {
 	if (direction == RIGHT)
 	{
-		return FloatRect(x, y, widthOfHit - 25, height);
+		return FloatRect(x, y, spriteHit.getLocalBounds().width - 25, height);
 	}
 	else if (direction == LEFT)
 	{
-		return FloatRect(x, y, this->widthOfHit + 100, height);
+		return FloatRect(x - 25, y, spriteHit.getLocalBounds().width, height);
 	}
 }
 
