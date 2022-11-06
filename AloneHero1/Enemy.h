@@ -5,6 +5,7 @@
 class Enemy : public Entity
 {
 	public:
+		bool collisionWithPlayer;
 		Enemy(double x, double y, double speed, int health, double strength) : Entity(x, y, speed, health, strength)
 		{
 			this->directory = "Enemies/";

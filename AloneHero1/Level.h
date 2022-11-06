@@ -10,6 +10,8 @@
 #include "tinyxml.h"
 #include "Enemy.h"
 #include "Skeleton.h"
+#include "Goblin.h"
+#include "Mushroom.h"
 #include "Player.h"
 #include "Entity.h"
 #include <typeinfo>
@@ -73,6 +75,7 @@ public:
 	void CheckCollision(double dx, double dy, Entity* entity);
 	bool GetCollisionWithPlayer();
 	void ViewOnPlayer(Player* player);
+	void FillEnemy(std::string nameOfEnemy);
 };
 #endif
 ///////////////////////////////////////

@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "levelfwd.h"// Forward declaration класса агрегата.
 
-const double BUF_OF_PLAYER_HIT = 47;
+
 //class Level;
 class Player : public Entity
 {

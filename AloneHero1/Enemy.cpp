@@ -48,8 +48,6 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	{
 		Damage(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDamage, strength, direction, window, level);
 	}
-
-
 }
 
 States Enemy::Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)

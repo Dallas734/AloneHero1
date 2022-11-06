@@ -17,7 +17,7 @@ Entity::Entity(double x, double y, double speed, int health, double strength)
 
 States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, double bufOfHit, Directions direction, RenderWindow& window, Level* level)
 {
-	SetSprite("Hit1.png", HIT, xBeginSprite, yBeginSprite, width, height);
+	SetSprite("Hit.png", HIT, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.01;
 	if (this->currentFrame > frames)
 	{
@@ -238,11 +238,11 @@ FloatRect Entity::getHitRect()
 {
 	if (direction == RIGHT)
 	{
-		return FloatRect(x, y, spriteHit.getLocalBounds().width - 25, height);
+		return FloatRect(x, y, spriteHit.getLocalBounds().width + bufOfHit, height);
 	}
 	else if (direction == LEFT)
 	{
-		return FloatRect(x - 25, y, spriteHit.getLocalBounds().width, height);
+		return FloatRect(x - bufOfHit, y, spriteHit.getLocalBounds().width, height);
 	}
 }
 

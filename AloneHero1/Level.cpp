@@ -267,12 +267,15 @@ bool Level::LoadFromFile(std::string filename)//двоеточия-обращение к методам кл
 		view.reset(FloatRect(0, 0, 1200, 800));
 	}
 
-	std::vector<Object> enemyObjects = GetObjects("Enemy");
+	FillEnemy("Skeleton");
+	FillEnemy("Goblin");
+	FillEnemy("Mushroom");
+	/*std::vector<Object> enemyObjects = GetObjects("Skeleton");
 	for (int i = 0; i < enemyObjects.size(); i++)
 	{
-		Enemy* enemy = new Skeleton(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.1, 23, 23);
+		Enemy* enemy = new Mushroom(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
 		enemies.push_back(*enemy);
-	}
+	}*/
 
 	return true;
 }
@@ -365,26 +368,24 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 		//////////////////////////////////////////////////////////////////////
 		
 		// Если враг пересекается с игроком
-		/*if (player->GetState() == HIT && player->getHitRect().intersects(player->getRect()) && typeid(*(entity)) == typeid(Player))
-		{
-			int a = 1;
-		}*/
+	
 		if (typeid(*(entity)) == typeid(Enemy))
 		{
-			if (entity->getRect().intersects(player->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
+			Enemy* enemy = (Enemy*)entity;
+			if (enemy->getRect().intersects(player->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
 			{
-				collisionWithPlayer = true;
+				enemy->collisionWithPlayer = true;
 				entity->SetState(HIT);
 				player->SetState(DAMAGE);
 				return;
 			}
-			else if (/*!entity->getRect().intersects(player->getRect()) && */collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
+			else if (enemy->collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
 			{
 				if (!entity->getRect().intersects(player->getRect()))
 				{
-					collisionWithPlayer = false;
+					enemy->collisionWithPlayer = false;
 				}
-				if (collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
+				if (enemy->collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
 				{
 					player->SetState(IDLE);
 				}
@@ -401,22 +402,22 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 			for (int i = 0; i < enemies.size(); i++)
 			{
 				Enemy* enemy = &enemies[i];
-				if (player->getHitRect().intersects(enemy->getRect()) && collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT && enemy->GetState() != HIT && ((player->GetDirection() == LEFT && player->GetX() > enemy->GetX()) || (player->GetDirection() == RIGHT && player->GetX() < enemy->GetX())))
+				if (player->getHitRect().intersects(enemy->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT && enemy->GetState() != HIT && ((player->GetDirection() == LEFT && player->GetX() > enemy->GetX()) || (player->GetDirection() == RIGHT && player->GetX() < enemy->GetX())))
 				{
-					collisionWithPlayer = true;
+					enemy->collisionWithPlayer = true;
 					enemy->SetState(DAMAGE);
 					return;
 				}
-				else if (collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
+				else if (enemy->collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
 				{
 					if (!player->getHitRect().intersects(enemy->getRect()))
 					{
-						collisionWithPlayer = false;
+						enemy->collisionWithPlayer = false;
 					}
 					if (player->GetState() != RUN && player->GetState() != HIT)
 					{
 						enemy->SetState(RUN);
-						collisionWithPlayer = false;
+						enemy->collisionWithPlayer = false;
 					}
 					return;
 				}
@@ -464,6 +465,19 @@ void Level::ViewOnPlayer(Player* player)
 	}
 
 	view.setCenter(tempX, tempY);
+}
+
+void Level::FillEnemy(std::string nameOfEnemy)
+{
+	std::vector<Object> enemyObjects = GetObjects(nameOfEnemy);
+	for (int i = 0; i < enemyObjects.size(); i++)
+	{
+		Enemy* enemy = nullptr;
+		if (nameOfEnemy == "Mushroom") enemy = new Mushroom(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
+		else if (nameOfEnemy == "Skeleton") enemy = new Skeleton(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
+		else if (nameOfEnemy == "Goblin") enemy = new Goblin(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
+		this->enemies.push_back(*enemy);	
+	}
 }
 
 void Level::Draw(sf::RenderWindow& window, float time)
