@@ -33,6 +33,7 @@ class Entity
 		double currentFrame; // Текущий кадр
 		int health; // Здоровье
 		double strength; // Сила
+		double damage; // Полученный урон
 		bool onGround;
 
 		double xBeginSprite;
@@ -86,10 +87,12 @@ class Entity
 		void SetDirection(Directions direction);
 		double GetWidth();
 		double GetHeight();
+		void SetDamage(double damage);
+		double GetStrength();
 
 	protected:
-		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, double bufOfHit, Directions direction, RenderWindow& window, Level* level); // Удар
-		void Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window, Level* level); // Получение урона
+		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double bufOfHit, Directions direction, RenderWindow& window, Level* level); // Удар
+		States Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double damage, Directions direction, RenderWindow& window, Level* level); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
 		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 };

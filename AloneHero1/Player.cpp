@@ -158,7 +158,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		direction = RIGHT;
 		state = HIT;
-		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFramesOfHit, this->strength, this->bufOfHit, direction, window, level);
+		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFramesOfHit, this->bufOfHit, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->CheckCollision(dx, 0, this);
 		level->ViewOnPlayer(this);
@@ -167,7 +167,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		direction = LEFT;
 		state = HIT;
-		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFramesOfHit, this->strength, this->bufOfHit, direction, window, level);
+		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFramesOfHit, this->bufOfHit, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->CheckCollision(dx, 0, this);
 		level->ViewOnPlayer(this);
@@ -190,7 +190,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (state == DAMAGE)
 	{
 		state = DAMAGE;
-		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfDamage, this->strength, direction, window, level);
+		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfDamage, this->damage, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
@@ -203,6 +203,11 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		level->ViewOnPlayer(this);
 	}
 
+	if (this->health <= 0)
+	{
+		// Death()...
+		this->~Player();
+	}
 }
 
 

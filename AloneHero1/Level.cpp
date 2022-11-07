@@ -270,12 +270,6 @@ bool Level::LoadFromFile(std::string filename)//двоеточия-обращение к методам кл
 	FillEnemy("Skeleton");
 	FillEnemy("Goblin");
 	FillEnemy("Mushroom");
-	/*std::vector<Object> enemyObjects = GetObjects("Skeleton");
-	for (int i = 0; i < enemyObjects.size(); i++)
-	{
-		Enemy* enemy = new Mushroom(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
-		enemies.push_back(*enemy);
-	}*/
 
 	return true;
 }
@@ -377,6 +371,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 				enemy->collisionWithPlayer = true;
 				entity->SetState(HIT);
 				player->SetState(DAMAGE);
+				//player->SetDamage(entity->GetStrength());
 				return;
 			}
 			else if (enemy->collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
@@ -406,6 +401,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 				{
 					enemy->collisionWithPlayer = true;
 					enemy->SetState(DAMAGE);
+					//enemy->SetDamage(entity->GetStrength());
 					return;
 				}
 				else if (enemy->collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
@@ -473,9 +469,9 @@ void Level::FillEnemy(std::string nameOfEnemy)
 	for (int i = 0; i < enemyObjects.size(); i++)
 	{
 		Enemy* enemy = nullptr;
-		if (nameOfEnemy == "Mushroom") enemy = new Mushroom(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
-		else if (nameOfEnemy == "Skeleton") enemy = new Skeleton(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
-		else if (nameOfEnemy == "Goblin") enemy = new Goblin(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 23, 23);
+		if (nameOfEnemy == "Mushroom") enemy = new Mushroom(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 100, 50);
+		else if (nameOfEnemy == "Skeleton") enemy = new Skeleton(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 300, 50);
+		else if (nameOfEnemy == "Goblin") enemy = new Goblin(enemyObjects[i].rect.left, enemyObjects[i].rect.top, 0.08, 200, 50);
 		this->enemies.push_back(*enemy);	
 	}
 }
@@ -487,6 +483,7 @@ void Level::Draw(sf::RenderWindow& window, float time)
 	{
 		enemies[i].Update(time, window, this);
 		//window.draw(enemies[i].GetSprite(enemies[i].GetState()));
+		// ?????? Срабатывание точки останова
 	}
 
 	// Отрисовка

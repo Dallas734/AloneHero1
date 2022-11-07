@@ -15,7 +15,7 @@ Entity::Entity(double x, double y, double speed, int health, double strength)
 	this->onGround = false;
 }
 
-States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, double bufOfHit, Directions direction, RenderWindow& window, Level* level)
+States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double bufOfHit, Directions direction, RenderWindow& window, Level* level)
 {
 	SetSprite("Hit.png", HIT, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.01;
@@ -45,7 +45,7 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	return HIT;
 }
 
-void Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double strength, Directions direction, RenderWindow& window, Level* level)
+States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double damage, Directions direction, RenderWindow& window, Level* level)
 {
 	SetSprite("Damage.png", DAMAGE, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.005;
@@ -67,10 +67,14 @@ void Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double
 		this->state = DAMAGE;
 	}
 
+	//this->health -= damage;
+
 	spriteDamage.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	spriteDamage.setPosition(this->x, this->y);
 
+	return DAMAGE;
 }
+
 
 States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
 {
@@ -138,6 +142,11 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 	spriteIdle.setPosition(x, y);
 
 	return IDLE;
+}
+
+double Entity::GetStrength()
+{
+	return this->strength;
 }
 
 void Entity::SetSpeed(double speed)
@@ -238,11 +247,11 @@ FloatRect Entity::getHitRect()
 {
 	if (direction == RIGHT)
 	{
-		return FloatRect(x, y, spriteHit.getLocalBounds().width + bufOfHit, height);
+		return FloatRect(x, y, spriteHit.getLocalBounds().width - 20, height);
 	}
 	else if (direction == LEFT)
 	{
-		return FloatRect(x - bufOfHit, y, spriteHit.getLocalBounds().width, height);
+		return FloatRect(x - 25, y, spriteHit.getLocalBounds().width, height);
 	}
 }
 
@@ -304,4 +313,9 @@ double Entity::GetWidth()
 double Entity::GetHeight()
 {
 	return this->height;
+}
+
+void Entity::SetDamage(double damage)
+{
+	this->damage = damage;
 }

@@ -31,7 +31,7 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	if (state == HIT)
 	{
 		
-		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, this->countFramesOfHit, strength, bufOfHit, direction, window, level);
+		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, this->countFramesOfHit, bufOfHit, direction, window, level);
 		/*if (level->GetCollisionWithPlayer())
 		{
 			if (direction == RIGHT) direction = LEFT;
@@ -41,12 +41,19 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 		{
 			state = RUN;
 		}*/
+		level->CheckCollision(dx, 0, this);
 		//level->CheckCollision(0, dy, this);
 	}
 
 	if (state == DAMAGE)
 	{
-		Damage(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDamage, strength, direction, window, level);
+		Damage(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDamage, this->damage, direction, window, level);
+	}
+
+	if (this->health <= 0)
+	{
+		// Death()...
+		this->~Enemy();
 	}
 }
 
