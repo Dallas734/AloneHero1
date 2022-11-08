@@ -3,58 +3,34 @@
 
 void Enemy::Update(float time, RenderWindow& window, Level* level)
 {
-	/*if (dy == 0 && state != RUN)
-	{
-		onGround = false;
-		dy += 0.0001 * time;
-	}*/
-
 	y += dy * time;
-	//CheckCollisionWithMap(0, dy, level, time);
 	level->CheckCollision(0, dy, this);
-
-	//Idle(time, xBeginSprite, yBeginSprite, width, height, countFramesOfIdle, direction, window, level);
 
 	if (state == FALL)
 	{
-		state = Fall(time, xBeginSprite, yBeginSprite, width, height, this->countFramesOfIdle, direction, window, level);
-		//level->CheckCollision(0, dy, this);
+		state = Fall(time, xBeginSprite, yBeginSprite, width, height, this->countFrames[IDLE], direction, window, level);
 	}
 
 	if (state == RUN)
 	{
-		Move(time, xBeginSprite, yBeginSprite, width, height, this->countFramesOfMove, direction, window, level);
-		//Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, countFramesOfHit, strength, bufOfHit, direction, window, level);
+		Move(time, xBeginSprite, yBeginSprite, width, height, this->countFrames[RUN], direction, window, level);
 		level->CheckCollision(0, dy, this);
 	}
 
 	if (state == HIT)
 	{
-		
-		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, this->countFramesOfHit, bufOfHit, direction, window, level);
-		/*if (level->GetCollisionWithPlayer())
-		{
-			if (direction == RIGHT) direction = LEFT;
-			else direction = RIGHT;
-		}*/
-		/*if (int(currentFrame) == 8)
-		{
-			state = RUN;
-		}*/
+		Hit(time, xBeginSpriteHit, yBeginSpriteHit, widthOfHit, heightOfHit, this->countFrames[HIT], bufOfHit, direction, window, level);
 		level->CheckCollision(dx, 0, this);
-		//level->CheckCollision(0, dy, this);
 	}
 
 	if (state == DAMAGE)
 	{
-		Damage(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDamage, this->damage, direction, window, level);
-		//Death(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDeath, direction, window, level);
+		Damage(time, xBeginSprite, yBeginSprite, width, height, countFrames[DAMAGE], this->damage, direction, window, level);
 	}
 
 	if (this->health <= 0)
 	{
-		Death(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDeath, direction, window, level);
-		//state = DEATH;
+		Death(time, xBeginSprite, yBeginSprite, width, height, countFrames[DEATH], direction, window, level);
 	}
 }
 
@@ -66,38 +42,30 @@ States Enemy::Fall(float time, double xBeginSprite, double yBeginSprite, double 
 
 	if (direction == RIGHT)
 	{
-		spriteIdle.setOrigin({ 0, 0 });
-		spriteIdle.setScale(1, 1);
+		sprites[IDLE].setOrigin({ 0, 0 });
+		sprites[IDLE].setScale(1, 1);
 		this->state = FALL;
 	}
 	else if (direction == LEFT)
 	{
-		spriteIdle.setOrigin({ spriteIdle.getLocalBounds().width, 0 });
-		spriteIdle.setScale(-1, 1);
+		sprites[IDLE].setOrigin({ sprites[IDLE].getLocalBounds().width, 0 });
+		sprites[IDLE].setScale(-1, 1);
 		this->state = FALL;
 	}
-
-	//CheckCollisionWithMap(0, dy, level, time);
-	//level->CheckCollision(0, dy, this);
 
 	if (onGround)
 	{
 		dy = 0;
-		//CheckCollisionWithMap(0, dy, level, time);
-		//level->CheckCollision(0, dy, this);
 		return IDLE;
 	}
 	else
 	{
 		y += dy * time;
 		dy += 0.0001 * time;
-		//CheckCollisionWithMap(0, dy, level, time);
-		//level->CheckCollision(0, dy, this);
 	}
 
-	//spriteFall.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
-	spriteIdle.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	spriteIdle.setPosition(x, y);
+	sprites[IDLE].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[IDLE].setPosition(x, y);
 
 	return FALL;
 }

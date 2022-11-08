@@ -29,19 +29,19 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 	
 	if (direction == RIGHT)
 	{
-		spriteHit.setOrigin({ 0, 0 });
-		spriteHit.setScale(1, 1);
+		sprites[HIT].setOrigin({ 0, 0 });
+		sprites[HIT].setScale(1, 1);
 		this->state = HIT;
 	}
 	else if (direction == LEFT)
 	{
-		spriteHit.setOrigin({ spriteHit.getLocalBounds().width / 2, 0 });
-		spriteHit.setScale(-1, 1);
+		sprites[HIT].setOrigin({ sprites[HIT].getLocalBounds().width / 2, 0 });
+		sprites[HIT].setScale(-1, 1);
 		this->state = HIT;
 	}
 
-	spriteHit.setTextureRect(IntRect(xBeginSprite + (width + bufOfHit) * int(currentFrame), yBeginSprite, width, height));
-	spriteHit.setPosition(this->x, this->y);
+	sprites[HIT].setTextureRect(IntRect(xBeginSprite + (width + bufOfHit) * int(currentFrame), yBeginSprite, width, height));
+	sprites[HIT].setPosition(this->x, this->y);
 	
 
 	return HIT;
@@ -60,17 +60,17 @@ States Entity::Death(float time, double xBeginSprite, double yBeginSprite, doubl
 
 	if (direction == RIGHT)
 	{
-		spriteDeath.setOrigin({ 0, 0 });
-		spriteDeath.setScale(1, 1);
+		sprites[DEATH].setOrigin({ 0, 0 });
+		sprites[DEATH].setScale(1, 1);
 	}
 	else if (direction == LEFT)
 	{
-		spriteDeath.setOrigin({ spriteDeath.getLocalBounds().width, 0 });
-		spriteDeath.setScale(-1, 1);
+		sprites[DEATH].setOrigin({ sprites[DEATH].getLocalBounds().width, 0 });
+		sprites[DEATH].setScale(-1, 1);
 	}
 
-	spriteDeath.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	spriteDeath.setPosition(this->x, this->y);
+	sprites[DEATH].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[DEATH].setPosition(this->x, this->y);
 	
 	return DEATH;
 }
@@ -87,21 +87,21 @@ States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, doub
 
 	if (direction == RIGHT)
 	{
-		spriteDamage.setOrigin({ 0, 0 });
-		spriteDamage.setScale(1, 1);
+		sprites[DAMAGE].setOrigin({ 0, 0 });
+		sprites[DAMAGE].setScale(1, 1);
 		this->state = DAMAGE;
 	}
 	else if (direction == LEFT)
 	{
-		spriteDamage.setOrigin({ spriteDamage.getLocalBounds().width, 0 });
-		spriteDamage.setScale(-1, 1);
+		sprites[DAMAGE].setOrigin({ sprites[DAMAGE].getLocalBounds().width, 0 });
+		sprites[DAMAGE].setScale(-1, 1);
 		this->state = DAMAGE;
 	}
 
 	//this->health -= damage;
 
-	spriteDamage.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	spriteDamage.setPosition(this->x, this->y);
+	sprites[DAMAGE].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[DAMAGE].setPosition(this->x, this->y);
 
 	return DAMAGE;
 }
@@ -111,22 +111,22 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 {
 
 	SetSprite("Run.png", RUN, xBeginSprite, yBeginSprite, width, height);
-	if (direction == RIGHT && /*(state == IDLE || state == RUN)*/onGround)
+	if (direction == RIGHT && onGround)
 	{
 		dx = speed;
-		spriteMove.setOrigin({ 0, 0 });
-		spriteMove.setScale(1, 1);
+		sprites[RUN].setOrigin({ 0, 0 });
+		sprites[RUN].setScale(1, 1);
 		this->state = RUN;
 	}
-	else if (direction == LEFT && /*(state == IDLE || state == RUN)*/onGround)
+	else if (direction == LEFT && onGround)
 	{
 		dx = -speed;
-		spriteMove.setOrigin({ spriteMove.getLocalBounds().width, 0 });
-		spriteMove.setScale(-1, 1);
+		sprites[RUN].setOrigin({ sprites[RUN].getLocalBounds().width, 0 });
+		sprites[RUN].setScale(-1, 1);
 		this->state = RUN;
 	}
 	
-	spriteMove.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[RUN].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	
 	this->x += dx * time;
 	level->CheckCollision(dx, 0, this);
@@ -139,7 +139,7 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 
 	if (onGround)
 	{
-		spriteMove.setPosition(this->x, this->y);
+		sprites[RUN].setPosition(this->x, this->y);
 	}
 
 	dx = 0;
@@ -158,19 +158,19 @@ States Entity::Idle(float time, double xBeginSprite, double yBeginSprite, double
 
 	if (direction == RIGHT)
 	{
-		spriteIdle.setOrigin({ 0, 0 });
-		spriteIdle.setScale(1, 1);
+		sprites[IDLE].setOrigin({ 0, 0 });
+		sprites[IDLE].setScale(1, 1);
 		this->state = IDLE;
 	}
 	else if (direction == LEFT)
 	{
-		spriteIdle.setOrigin({ spriteIdle.getLocalBounds().width, 0 });
-		spriteIdle.setScale(-1, 1);
+		sprites[IDLE].setOrigin({ sprites[IDLE].getLocalBounds().width, 0 });
+		sprites[IDLE].setScale(-1, 1);
 		this->state = IDLE;
 	}
 	
-	spriteIdle.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	spriteIdle.setPosition(x, y);
+	sprites[IDLE].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[IDLE].setPosition(x, y);
 
 	return IDLE;
 }
@@ -196,25 +196,25 @@ Sprite Entity::GetSprite(States spriteName)
 	switch (spriteName)
 	{
 	case JUMP:
-		return spriteJump;
+		return sprites[JUMP];
 		break;
 	case RUN:
-		return spriteMove;
+		return sprites[RUN];
 		break;
 	case DAMAGE:
-		return spriteDamage;
+		return sprites[DAMAGE];
 		break;
 	case HIT:
-		return spriteHit;
+		return sprites[HIT];
 		break;
 	case IDLE:
-		return spriteIdle;
+		return sprites[IDLE];
 		break;
 	case FALL:
-		return spriteFall;
+		return sprites[FALL];
 		break;
 	case DEATH:
-		return spriteDeath;
+		return sprites[DEATH];
 		break;
 	}
 }
@@ -227,32 +227,32 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 	switch (spriteName)
 	{
 	case JUMP:
-		spriteJump.setTexture(texture);
-		spriteJump.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[JUMP].setTexture(texture);
+		sprites[JUMP].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case RUN:
-		spriteMove.setTexture(texture);
-		spriteMove.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[RUN].setTexture(texture);
+		sprites[RUN].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case DAMAGE:
-		spriteDamage.setTexture(texture);
-		spriteDamage.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[DAMAGE].setTexture(texture);
+		sprites[DAMAGE].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case HIT:
-		spriteHit.setTexture(texture);
-		spriteHit.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[HIT].setTexture(texture);
+		sprites[HIT].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case IDLE:
-		spriteIdle.setTexture(texture);
-		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[IDLE].setTexture(texture);
+		sprites[IDLE].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case FALL:
-		spriteFall.setTexture(texture);
-		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[FALL].setTexture(texture);
+		sprites[FALL].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	case DEATH:
-		spriteDeath.setTexture(texture);
-		spriteDeath.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		sprites[DEATH].setTexture(texture);
+		sprites[DEATH].setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 		break;
 	}
 }
@@ -286,11 +286,11 @@ FloatRect Entity::getHitRect()
 {
 	if (direction == RIGHT)
 	{
-		return FloatRect(x, y, spriteHit.getLocalBounds().width - 20, height);
+		return FloatRect(x, y, sprites[HIT].getLocalBounds().width - 20, height);
 	}
 	else if (direction == LEFT)
 	{
-		return FloatRect(x - 25, y, spriteHit.getLocalBounds().width, height);
+		return FloatRect(x - 25, y, sprites[HIT].getLocalBounds().width, height);
 	}
 }
 

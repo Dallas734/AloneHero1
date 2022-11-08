@@ -2,8 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 #include "levelfwd.h"
+#include "map"
 
 using namespace sf;
+using namespace std;
 
 enum States
 {
@@ -41,23 +43,12 @@ class Entity
 		double yBeginSprite;
 		double widthOfHit;
 		double heightOfHit;
-		int countFramesOfMove;
-		int countFramesOfIdle;
-		int countFramesOfHit;
-		int countFramesOfDamage;
-		int countFramesOfFall;
-		int countFramesOfDeath;
+		map <States, int> countFrames;
 		double xBeginSpriteHit;
 		double yBeginSpriteHit;
 
 		String directory; // Имя директории, где хранятся анимации
-		Sprite spriteMove; // Спрайт движения
-		Sprite spriteIdle; // Спрайт статичного состояния
-		Sprite spriteHit; // Спрайт удара
-		Sprite spriteJump;
-		Sprite spriteFall;
-		Sprite spriteDamage;
-		Sprite spriteDeath;
+		map <States, Sprite> sprites; // Спрайты
 		States state;
 		Image image; // Картинка для создания спрайтов
 		Texture texture; // Текстура для создания спрайтов

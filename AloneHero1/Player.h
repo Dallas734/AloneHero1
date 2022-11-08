@@ -8,8 +8,6 @@
 //class Level;
 class Player : public Entity
 {
-	private:
-		int countFramesOfJump;
 	public:
 		Player(double x, double y) : Entity(x, y, 0.1, 1000, 100)
 		{
@@ -22,14 +20,13 @@ class Player : public Entity
 			this->xBeginSprite = 56;
 			this->yBeginSprite = 44;
 			this->widthOfHit = 109;
-			this->countFramesOfMove = 8;
-			this->countFramesOfIdle = 8;
-			this->countFramesOfHit = 4;
-			this->countFramesOfDamage = 4;
-			this->countFramesOfJump = 2;
-			this->countFramesOfIdle = 8;
-			this->countFramesOfFall = 2;
-			this->countFramesOfDeath = 6;
+			this->countFrames[RUN] = 8;
+			this->countFrames[IDLE] = 8;
+			this->countFrames[HIT] = 4;
+			this->countFrames[DAMAGE] = 4;
+			this->countFrames[JUMP] = 2;
+			this->countFrames[FALL] = 2;
+			this->countFrames[DEATH] = 6;
 		};
 		~Player() {};
 		void HelthUP(int regenerationUnits);

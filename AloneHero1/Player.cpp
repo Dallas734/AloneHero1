@@ -18,26 +18,18 @@ States Player::Jump(float time, double xBeginSprite, double yBeginSprite, double
 	if (onGround)
 	{
 		this->dy = 0;
-		//CheckCollisionWithMap(0, dy, level, time);
 		return IDLE;
 	}
 	else
 	{
 		this->y += dy * time;
 		this->dy += 0.0001 * time;
-		//CheckCollisionWithMap(0, dy, level, time);
 	}
 
-	//CheckCollisionWithMap(0, dy, level);
 	this->dx = 0;
 	
-	//spriteJump.setTextureRect(IntRect(xBeginSprite * int(currentFrame), yBeginSprite, width, height));
-	spriteJump.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	
-	spriteJump.setPosition(this->x, this->y);
-	/*window.clear();
-	window.draw(GetSprite(JUMP));
-	window.display();*/
+	sprites[JUMP].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[JUMP].setPosition(this->x, this->y);
 	
 	return JUMP;
 }
@@ -50,35 +42,30 @@ States Player::Fall(float time, double xBeginSprite, double yBeginSprite, double
 
 	if (direction == RIGHT)
 	{
-		spriteFall.setOrigin({ 0, 0 });
-		spriteFall.setScale(1, 1);
+		sprites[FALL].setOrigin({ 0, 0 });
+		sprites[FALL].setScale(1, 1);
 		this->state = FALL;
 	}
 	else if (direction == LEFT)
 	{
-		spriteFall.setOrigin({ spriteFall.getLocalBounds().width, 0 });
-		spriteFall.setScale(-1, 1);
+		sprites[FALL].setOrigin({ sprites[FALL].getLocalBounds().width, 0 });
+		sprites[FALL].setScale(-1, 1);
 		this->state = FALL;
 	}
 
-	//CheckCollisionWithMap(0, dy, level, time);
-	//level->CheckCollision(0, dy, this);
 	if (onGround)
 	{
 		this->dy = 0;
-		//CheckCollisionWithMap(0, dy, level, time);
 		return IDLE;
 	}
 	else
 	{
 		this->y += dy * time;
 		this->dy += 0.0001 * time;
-		//CheckCollisionWithMap(0, dy, level, time);
 	}
 
-	//spriteFall.setTextureRect(IntRect(width * int(currentFrame), yBeginSprite, width, height));
-	spriteFall.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
-	spriteFall.setPosition(x, y);
+	sprites[FALL].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	sprites[FALL].setPosition(x, y);
 
 	return FALL;
 }
@@ -116,7 +103,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			direction = RIGHT;
 			state = RUN;
-			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfMove, direction, window, level);
+			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[RUN], direction, window, level);
 			//ViewOnPlayer(x, y, level);
 			level->ViewOnPlayer(this);
 		}
@@ -126,8 +113,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 			x += dx * time;
 			//CheckCollisionWithMap(dx, 0, level, time);
 			level->CheckCollision(dx, 0, this);
-			spriteJump.setOrigin({ 0, 0 });
-			spriteJump.setScale(1, 1);
+			sprites[JUMP].setOrigin({ 0, 0 });
+			sprites[JUMP].setScale(1, 1);
 			dx = 0;
 		}
 		
@@ -138,7 +125,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			direction = LEFT;
 			state = RUN;
-			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfMove, direction, window, level);
+			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[RUN], direction, window, level);
 			// ViewOnPlayer(x, y, level);
 			level->ViewOnPlayer(this);
 		}
@@ -148,8 +135,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 			x += dx * time;
 			//CheckCollisionWithMap(dx, 0, level, time);
 			level->CheckCollision(dx, 0, this);
-			spriteJump.setOrigin({ spriteJump.getLocalBounds().width, 0 });
-			spriteJump.setScale(-1, 1);
+			sprites[JUMP].setOrigin({ sprites[JUMP].getLocalBounds().width, 0 });
+			sprites[JUMP].setScale(-1, 1);
 			dx = 0;
 		}
 		
@@ -158,7 +145,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		direction = RIGHT;
 		state = HIT;
-		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFramesOfHit, this->bufOfHit, direction, window, level);
+		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFrames[HIT], this->bufOfHit, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->CheckCollision(dx, 0, this);
 		level->ViewOnPlayer(this);
@@ -167,7 +154,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		direction = LEFT;
 		state = HIT;
-		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFramesOfHit, this->bufOfHit, direction, window, level);
+		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFrames[HIT], this->bufOfHit, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->CheckCollision(dx, 0, this);
 		level->ViewOnPlayer(this);
@@ -175,14 +162,14 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	else if (state == IDLE)
 	{
 		state = IDLE;
-		Idle(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfIdle, direction, window, level);
+		Idle(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[IDLE], direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 
 	if (state == FALL)
 	{
-		state = Fall(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfFall, direction, window, level);
+		state = Fall(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[FALL], direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
@@ -190,7 +177,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (state == DAMAGE)
 	{
 		state = DAMAGE;
-		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfDamage, this->damage, direction, window, level);
+		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[DAMAGE], this->damage, direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
@@ -198,7 +185,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (((Keyboard::isKeyPressed(Keyboard::Space) && onGround) || (!onGround && state == JUMP)) && state != HIT && state != DAMAGE)
 	{
 		state = JUMP;
-		Jump(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfJump, direction, window, level);
+		Jump(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[JUMP], direction, window, level);
 		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}

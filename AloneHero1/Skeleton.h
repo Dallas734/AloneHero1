@@ -13,11 +13,11 @@ class Skeleton : public Enemy
 			this->widthOfHit = 111;
 			this->height = 54;
 			this->bufWidth = 102;
-			this->countFramesOfMove = 4;
-			this->countFramesOfIdle = 4;
-			this->countFramesOfHit = 8;
-			this->countFramesOfDamage = 4;
-			this->countFramesOfDeath = 4;
+			this->countFrames[RUN] = 4;
+			this->countFrames[IDLE] = 4;
+			this->countFrames[HIT] = 8;
+			this->countFrames[DAMAGE] = 4;
+			this->countFrames[DEATH] = 4;
 			this->bufOfHit = 40;
 			this->heightOfHit = 61;
 			this->xBeginSpriteHit = 49;
