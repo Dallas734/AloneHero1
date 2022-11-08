@@ -17,6 +17,7 @@ class Mushroom : public Enemy
 			this->countFramesOfIdle = 4;
 			this->countFramesOfHit = 8;
 			this->countFramesOfDamage = 4;
+			this->countFramesOfDeath = 4;
 			this->bufOfHit = 114;
 			this->heightOfHit = 46;
 			this->xBeginSpriteHit = 40;

@@ -371,7 +371,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 				enemy->collisionWithPlayer = true;
 				entity->SetState(HIT);
 				player->SetState(DAMAGE);
-				//player->SetDamage(entity->GetStrength());
+				player->SetDamage(entity->GetStrength());
 				return;
 			}
 			else if (enemy->collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
@@ -401,7 +401,7 @@ void Level::CheckCollision(double dx, double dy, Entity* entity)
 				{
 					enemy->collisionWithPlayer = true;
 					enemy->SetState(DAMAGE);
-					//enemy->SetDamage(entity->GetStrength());
+					enemy->SetDamage(entity->GetStrength());
 					return;
 				}
 				else if (enemy->collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
@@ -479,11 +479,21 @@ void Level::FillEnemy(std::string nameOfEnemy)
 void Level::Draw(sf::RenderWindow& window, float time)
 {
 	player->Update(time, window, this);
-	for (int i = 0; i < enemies.size(); i++)
+	//if (player->GetState() == DEATH)
+	//{
+	//	
+	//}
+	
+	// Проходимся по всем врагам
+	for (std::vector<Enemy>::iterator it = enemies.begin(); it != enemies.end(); )
 	{
-		enemies[i].Update(time, window, this);
+		it->Update(time, window, this);
+		if (it->GetState() == DEATH)
+		{
+			it = enemies.erase(it);
+		}
+		else it++;
 		//window.draw(enemies[i].GetSprite(enemies[i].GetState()));
-		// ?????? Срабатывание точки останова
 	}
 
 	// Отрисовка

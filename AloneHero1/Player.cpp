@@ -205,8 +205,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 
 	if (this->health <= 0)
 	{
-		// Death()...
-		this->~Player();
+		//Death(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfDeath, direction, window, level);
+		//state = DEATH;
 	}
 }
 

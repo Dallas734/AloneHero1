@@ -12,7 +12,8 @@ enum States
 	DAMAGE,
 	IDLE,
 	JUMP,
-	FALL
+	FALL,
+	DEATH
 };
 
 enum Directions
@@ -39,12 +40,13 @@ class Entity
 		double xBeginSprite;
 		double yBeginSprite;
 		double widthOfHit;
+		double heightOfHit;
 		int countFramesOfMove;
 		int countFramesOfIdle;
 		int countFramesOfHit;
 		int countFramesOfDamage;
 		int countFramesOfFall;
-		double heightOfHit;
+		int countFramesOfDeath;
 		double xBeginSpriteHit;
 		double yBeginSpriteHit;
 
@@ -55,6 +57,7 @@ class Entity
 		Sprite spriteJump;
 		Sprite spriteFall;
 		Sprite spriteDamage;
+		Sprite spriteDeath;
 		States state;
 		Image image; // Картинка для создания спрайтов
 		Texture texture; // Текстура для создания спрайтов
@@ -94,6 +97,7 @@ class Entity
 		States Hit(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double bufOfHit, Directions direction, RenderWindow& window, Level* level); // Удар
 		States Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double damage, Directions direction, RenderWindow& window, Level* level); // Получение урона
 		States Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Движение
-		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
+		States Idle(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Бездействие
+		States Death(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level); // Смерть
 };
 

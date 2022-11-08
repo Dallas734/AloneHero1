@@ -29,7 +29,7 @@ class Player : public Entity
 			this->countFramesOfJump = 2;
 			this->countFramesOfIdle = 8;
 			this->countFramesOfFall = 2;
-
+			this->countFramesOfDeath = 6;
 		};
 		~Player() {};
 		void HelthUP(int regenerationUnits);

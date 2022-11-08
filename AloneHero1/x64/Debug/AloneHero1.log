@@ -1,263 +1,43 @@
-﻿  Entity.cpp
+﻿  Level.cpp
 C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Goblin.h(7,97): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(42,111): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(42,104): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(42,90): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(42,48): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(43,37): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(43,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(72,114): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(72,107): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(72,93): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(72,51): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(73,40): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(73,31): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(98,112): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(98,105): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(98,91): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(98,49): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(111,39): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(111,30): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(141,112): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(141,105): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(141,91): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(141,49): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(142,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(142,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(197,72): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(197,65): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(197,51): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(197,37): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(201,72): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(201,65): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(201,51): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(201,37): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(205,74): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(205,67): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(205,53): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(205,39): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(209,71): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(209,64): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(209,50): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(209,36): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(213,72): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(213,65): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(213,51): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(213,37): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(217,72): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(217,65): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(217,51): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(217,37): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(228,32): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(95,18): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(96,24): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(140,41): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(140,26): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(201,27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(201,24): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(222,22): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(228,25): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(223,23): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(228,22): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(224,25): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(228,19): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(225,24): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(250,65): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(47,16): warning C4101: image: неиспользованная локальная переменная
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(437,51): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(250,23): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(437,31): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(250,20): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(254,65): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(254,28): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(254,22): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(186): warning C4715: Entity::GetSprite: значение возвращается не при всех путях выполнения
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Entity.cpp(256): warning C4715: Entity::getHitRect: значение возвращается не при всех путях выполнения
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(463,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(463,17): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(283): warning C4715: Level::GetObject: значение возвращается не при всех путях выполнения
   AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe

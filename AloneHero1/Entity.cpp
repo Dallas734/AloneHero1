@@ -26,6 +26,7 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 		return RUN;
 	}
 	
+	
 	if (direction == RIGHT)
 	{
 		spriteHit.setOrigin({ 0, 0 });
@@ -41,8 +42,37 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 
 	spriteHit.setTextureRect(IntRect(xBeginSprite + (width + bufOfHit) * int(currentFrame), yBeginSprite, width, height));
 	spriteHit.setPosition(this->x, this->y);
+	
 
 	return HIT;
+}
+
+States Entity::Death(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* Level)
+{
+	SetSprite("Death.png", DEATH, xBeginSprite, yBeginSprite, width, height);
+	
+	currentFrame += time * 0.01;
+	if (this->currentFrame > frames)
+	{
+		this->currentFrame -= frames;
+		this->state = DEATH;
+	}
+
+	if (direction == RIGHT)
+	{
+		spriteDeath.setOrigin({ 0, 0 });
+		spriteDeath.setScale(1, 1);
+	}
+	else if (direction == LEFT)
+	{
+		spriteDeath.setOrigin({ spriteDeath.getLocalBounds().width, 0 });
+		spriteDeath.setScale(-1, 1);
+	}
+
+	spriteDeath.setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
+	spriteDeath.setPosition(this->x, this->y);
+	
+	return DEATH;
 }
 
 States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double damage, Directions direction, RenderWindow& window, Level* level)
@@ -52,6 +82,7 @@ States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, doub
 	if (this->currentFrame > frames)
 	{
 		this->currentFrame -= frames;
+		this->health -= damage;
 	}
 
 	if (direction == RIGHT)
@@ -182,6 +213,9 @@ Sprite Entity::GetSprite(States spriteName)
 	case FALL:
 		return spriteFall;
 		break;
+	case DEATH:
+		return spriteDeath;
+		break;
 	}
 }
 
@@ -215,6 +249,11 @@ void Entity::SetSprite(String fileName, States spriteName, double xBeginSprite, 
 	case FALL:
 		spriteFall.setTexture(texture);
 		spriteIdle.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		break;
+	case DEATH:
+		spriteDeath.setTexture(texture);
+		spriteDeath.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+		break;
 	}
 }
 

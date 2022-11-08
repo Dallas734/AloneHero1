@@ -48,12 +48,13 @@ void Enemy::Update(float time, RenderWindow& window, Level* level)
 	if (state == DAMAGE)
 	{
 		Damage(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDamage, this->damage, direction, window, level);
+		//Death(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDeath, direction, window, level);
 	}
 
 	if (this->health <= 0)
 	{
-		// Death()...
-		this->~Enemy();
+		Death(time, xBeginSprite, yBeginSprite, width, height, countFramesOfDeath, direction, window, level);
+		//state = DEATH;
 	}
 }
 
