@@ -26,7 +26,6 @@ States Entity::Hit(float time, double xBeginSprite, double yBeginSprite, double 
 		return RUN;
 	}
 	
-	
 	if (direction == RIGHT)
 	{
 		sprites[HIT].setOrigin({ 0, 0 });

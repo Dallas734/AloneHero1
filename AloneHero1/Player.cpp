@@ -93,25 +93,22 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	}
 	//dy += 0.0001 * time; // Раскоментировав, будет больше притяжение.
 	y += dy * time; 
-	//CheckCollisionWithMap(0, dy, level, time);
 	level->CheckCollision(0, dy, this);
 
 	// Состояния
-	if (Keyboard::isKeyPressed(Keyboard::D)/* && onGround*/)
+	if (Keyboard::isKeyPressed(Keyboard::D))
 	{	
 		if (state == IDLE)
 		{
 			direction = RIGHT;
 			state = RUN;
 			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[RUN], direction, window, level);
-			//ViewOnPlayer(x, y, level);
 			level->ViewOnPlayer(this);
 		}
 		if (state == JUMP)
 		{
 			dx = speed;
 			x += dx * time;
-			//CheckCollisionWithMap(dx, 0, level, time);
 			level->CheckCollision(dx, 0, this);
 			sprites[JUMP].setOrigin({ 0, 0 });
 			sprites[JUMP].setScale(1, 1);
@@ -119,21 +116,19 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		}
 		
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::A)/* && onGround*/)
+	else if (Keyboard::isKeyPressed(Keyboard::A))
 	{
 		if (state == IDLE)
 		{
 			direction = LEFT;
 			state = RUN;
 			Move(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[RUN], direction, window, level);
-			// ViewOnPlayer(x, y, level);
 			level->ViewOnPlayer(this);
 		}
 		if (state == JUMP)
 		{
 			dx = -speed;
 			x += dx * time;
-			//CheckCollisionWithMap(dx, 0, level, time);
 			level->CheckCollision(dx, 0, this);
 			sprites[JUMP].setOrigin({ sprites[JUMP].getLocalBounds().width, 0 });
 			sprites[JUMP].setScale(-1, 1);
@@ -146,7 +141,6 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		direction = RIGHT;
 		state = HIT;
 		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFrames[HIT], this->bufOfHit, direction, window, level);
-		// ViewOnPlayer(x, y, level);
 		level->CheckCollision(dx, 0, this);
 		level->ViewOnPlayer(this);
 	}
@@ -155,7 +149,6 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		direction = LEFT;
 		state = HIT;
 		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFrames[HIT], this->bufOfHit, direction, window, level);
-		// ViewOnPlayer(x, y, level);
 		level->CheckCollision(dx, 0, this);
 		level->ViewOnPlayer(this);
 	}
@@ -163,14 +156,12 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		state = IDLE;
 		Idle(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[IDLE], direction, window, level);
-		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 
 	if (state == FALL)
 	{
 		state = Fall(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[FALL], direction, window, level);
-		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 	
@@ -178,7 +169,6 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		state = DAMAGE;
 		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[DAMAGE], this->damage, direction, window, level);
-		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 
@@ -186,14 +176,12 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	{
 		state = JUMP;
 		Jump(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[JUMP], direction, window, level);
-		// ViewOnPlayer(x, y, level);
 		level->ViewOnPlayer(this);
 	}
 
 	if (this->health <= 0)
 	{
-		//Death(time, xBeginSprite, yBeginSprite, this->width, this->height, countFramesOfDeath, direction, window, level);
-		//state = DEATH;
+		Death(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[DEATH], direction, window, level);
 	}
 }
 

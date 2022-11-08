@@ -479,10 +479,10 @@ void Level::FillEnemy(std::string nameOfEnemy)
 void Level::Draw(sf::RenderWindow& window, float time)
 {
 	player->Update(time, window, this);
-	//if (player->GetState() == DEATH)
-	//{
-	//	
-	//}
+	if (player->GetState() == DEATH)
+	{
+		this->Draw(window, time);
+	}
 	
 	// Проходимся по всем врагам
 	for (std::vector<Enemy>::iterator it = enemies.begin(); it != enemies.end(); )

@@ -9,7 +9,7 @@
 class Player : public Entity
 {
 	public:
-		Player(double x, double y) : Entity(x, y, 0.1, 1000, 100)
+		Player(double x, double y) : Entity(x, y, 0.1, 100, 100)
 		{
 			this->directory = "Player/";
 			this->state = FALL;
