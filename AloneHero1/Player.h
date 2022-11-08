@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "levelfwd.h"// Forward declaration класса агрегата.

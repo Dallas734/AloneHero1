@@ -5,6 +5,10 @@ bool Game::StartGame()
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Alone Hero");
     Clock clock;
 
+    // Инициализация уровней
+    std::vector<Level*> levels;
+    levels.push_back(new Level("map_XML_2.tmx"));
+
     // Карта
     Level lvl("map_XML_2.tmx");//создали экземпляр класса уровень
 
@@ -22,10 +26,11 @@ bool Game::StartGame()
                 window.close();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Tab)) return true;
+        if (Keyboard::isKeyPressed(Keyboard::Tab) || endGame) 
+            return true;
         if (Keyboard::isKeyPressed(Keyboard::Escape)) return false;
 
-        levels.at(0)->Draw(window, time);
+        levels.at(0)->Draw(window, time, this);
     }
 
     return false;
@@ -34,5 +39,15 @@ bool Game::StartGame()
 
 void Game::GameRunning()
 {
-	if (StartGame()) GameRunning();
+    // В этом условии сделать переход в меню
+    if (StartGame())
+    {
+        endGame = false;
+        GameRunning();
+    }
+}
+
+void Game::SetEndGame(bool endGame)
+{
+    this->endGame = endGame;
 }

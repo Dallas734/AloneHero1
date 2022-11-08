@@ -1,3 +1,4 @@
-﻿  main.cpp
+﻿  Game.cpp
 C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Goblin.h(7,97): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\Aleksandr\source\repos\AloneHero1\AloneHero1\Game.cpp(18,20): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
   AloneHero1.vcxproj -> C:\Users\Aleksandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe

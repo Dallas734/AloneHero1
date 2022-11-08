@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Game.h"
 
 
 //int Object::GetPropertyInt(std::string name)//возвращаем номер свойства в нашем списке
@@ -476,12 +477,13 @@ void Level::FillEnemy(std::string nameOfEnemy)
 	}
 }
 
-void Level::Draw(sf::RenderWindow& window, float time)
+void Level::Draw(sf::RenderWindow& window, float time, Game* game)
 {
 	player->Update(time, window, this);
 	if (player->GetState() == DEATH)
 	{
-		this->Draw(window, time);
+		game->SetEndGame(true);
+		return;
 	}
 	
 	// Проходимся по всем врагам

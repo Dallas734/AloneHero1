@@ -8,13 +8,14 @@
 class Game
 {
 	private:
-		std::vector<Level*> levels;
+		bool endGame;
 	public:
 		Game()
 		{
-			levels.push_back(new Level("map_XML_2.tmx"));
+			endGame = false;
 		}
 		bool StartGame();
 		void GameRunning();
+		void SetEndGame(bool endGame);
 };
 
