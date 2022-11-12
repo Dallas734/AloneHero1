@@ -530,11 +530,21 @@ void Level::Draw(sf::RenderWindow& window, float time, Game* game)
 		for (int tile = 0; tile < layers[layer].tiles.size(); tile++)
 			window.draw(layers[layer].tiles[tile]);
 
+	// Рисуем персонажа
 	window.draw(player->GetSprite(player->GetState()));
+	
+	// Рисуем врагов
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		window.draw(enemies[i].GetSprite(enemies[i].GetState()));
 	}
+
+	// Рисуем предметы поддержки
+	for (int i = 0; i < supportItems.size(); i++)
+	{
+		window.draw(supportItems[i].GetSprite());
+	}
+
 	window.display();
 }
 

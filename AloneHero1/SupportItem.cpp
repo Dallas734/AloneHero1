@@ -7,19 +7,17 @@ void SupportItem::Update(float time, RenderWindow& window)
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
 
-	double beginY = y;
-
-	if (y <= beginY + 10 && up)
+	if (y <= beginY + 10 && up == false)
 	{
-		y += 0.0001 * time;
+		y += 0.01 * time;
 	}
-	else up = false;
+	else if (y >= beginY + 10) up = true;
 
-	if (y >= beginY - 10 && up == false)
+	if (y >= beginY - 10 && up == true)
 	{
-		y += -0.0001 * time;
+		y += -0.01 * time;
 	}
-	else up = true;
+	else if (y <= beginY - 10) up = false;
 
 	sprite.setPosition(this->x, this->y);
 }
@@ -27,4 +25,9 @@ void SupportItem::Update(float time, RenderWindow& window)
 bool SupportItem::GetUsed()
 {
 	return this->used;;
+}
+
+Sprite SupportItem::GetSprite()
+{
+	return this->sprite;
 }

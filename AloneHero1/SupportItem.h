@@ -8,6 +8,7 @@ class SupportItem
 {
 protected:
 	double x, y;
+	double beginY;
 	Image image;
 	Texture  texture;
 	Sprite sprite;
@@ -24,6 +25,7 @@ public:
 	{
 		this->x = x;
 		this->y = y;
+		this->beginY = y;
 		this->improveUnits = improveUnits;
 		this->fileName = "Images/Potions/PotionsPack1.png";
 		up = true;
@@ -33,6 +35,7 @@ public:
 	void Update(float time, RenderWindow& window);
 	//virtual void Improve(Player& player);
 	bool GetUsed();
+	Sprite GetSprite();
 
 };
 

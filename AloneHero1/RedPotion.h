@@ -4,7 +4,7 @@
 class RedPotion : public SupportItem
 {
 	public:
-		RedPotion(double x, double, int improveUnits) : SupportItem(x, y, improveUnits)
+		RedPotion(double x, double y, int improveUnits) : SupportItem(x, y, improveUnits)
 		{
 			this->xBeginSprite = 8;
 			this->yBeginSprite = 231;
