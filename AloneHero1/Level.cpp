@@ -316,115 +316,6 @@ int Level::GetHeight()
 	return this->height;
 }
 
-void Level::CheckCollision(double dx, double dy, Entity* entity)
-{
-	std::vector<Object> obj = this->GetAllObjects();
-	for (int i = 0; i < obj.size(); i++)
-	{
-		if (entity->getRect().intersects(obj[i].rect))
-		{
-			if (obj[i].name == "Solid" )
-			{
-				if (dy > 0) {
-					entity->SetY(obj[i].rect.top - entity->GetHeight());
-					entity->SetDY(0); // Для анимации
-					if (typeid(*(entity)) == typeid(Enemy))
-					{
-						entity->SetState(RUN);
-						//entity->SetState(HIT);
-					}
-					else
-					{
-						entity->SetState(IDLE);
-					}
-					entity->SetOnground(true);
-				}
-				if (dy < 0) 
-				{ 
-					entity->SetY(obj[i].rect.top + obj[i].rect.height); /*this->dy = 0;*/ std::cout << "I'm minus!"; 
-				}
-				if (dx > 0) 
-				{ 
-					entity->SetX(obj[i].rect.left - entity->GetWidth()); 
-				}
-				if (dx < 0)
-				{ 
-					entity->SetX(obj[i].rect.left + obj[i].rect.width);
-				}
-			}
-			
-			if (obj[i].name == "enemyBarier"  && typeid(*(entity)) == typeid(Enemy))
-			{
-			if (entity->GetDirection() == RIGHT) entity->SetDirection(LEFT);
-			else entity->SetDirection(RIGHT);
-			}
-		}
-
-		//////////////////////////////////////////////////////////////////////
-		
-		// Если враг пересекается с игроком
-	
-		if (typeid(*(entity)) == typeid(Enemy))
-		{
-			Enemy* enemy = (Enemy*)entity;
-			if (enemy->getRect().intersects(player->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
-			{
-				enemy->collisionWithPlayer = true;
-				entity->SetState(HIT);
-				player->SetState(DAMAGE);
-				player->SetDamage(entity->GetStrength());
-				return;
-			}
-			else if (enemy->collisionWithPlayer && entity->GetState() == RUN && player->GetDY() == 0)
-			{
-				if (!entity->getRect().intersects(player->getRect()))
-				{
-					enemy->collisionWithPlayer = false;
-				}
-				if (enemy->collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
-				{
-					player->SetState(IDLE);
-				}
-				return;
-			}
-		}
-		////////////////////////////////////////////////////////////////////////
-
-		// Если игрок пересекает врага при ударе.
-		////////////////////////////////////////////////////////////////////////
-
-		if (typeid(*(entity)) == typeid(Player))
-		{
-			for (int i = 0; i < enemies.size(); i++)
-			{
-				Enemy* enemy = &enemies[i];
-				if (player->getHitRect().intersects(enemy->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT && enemy->GetState() != HIT && ((player->GetDirection() == LEFT && player->GetX() > enemy->GetX()) || (player->GetDirection() == RIGHT && player->GetX() < enemy->GetX())))
-				{
-					enemy->collisionWithPlayer = true;
-					enemy->SetState(DAMAGE);
-					enemy->SetDamage(entity->GetStrength());
-					return;
-				}
-				else if (enemy->collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
-				{
-					if (!player->getHitRect().intersects(enemy->getRect()))
-					{
-						enemy->collisionWithPlayer = false;
-					}
-					if (player->GetState() != RUN && player->GetState() != HIT)
-					{
-						enemy->SetState(RUN);
-						enemy->collisionWithPlayer = false;
-					}
-					return;
-				}
-			}
-		}
-
-		/////////////////////////////////////////////////////////////////////////////////////////////
-	}
-}
-
 bool Level::GetCollisionWithPlayer()
 {
 	return this->collisionWithPlayer;
@@ -462,6 +353,111 @@ void Level::ViewOnPlayer(Player* player)
 	}
 
 	view.setCenter(tempX, tempY);
+}
+
+void Level::GetMessage(Message& message)
+{
+	Message* messageToEnemy = nullptr;
+	Message* messageToPlayer = nullptr;
+	Message* messageToSomeone = nullptr;
+	std::vector<Object> obj = this->GetAllObjects();
+
+	//	Общая проверка столкновения при хлдьбе
+	if (message.code == RUN_C)
+	{
+		for (int i = 0; i < obj.size(); i++)
+		{
+			if (message.sender->getRect().intersects(obj[i].rect))
+			{
+				if (obj[i].name == "Solid")
+				{
+					if (message.dy > 0) {
+						messageToSomeone = new Message(FALL_C, 0, nullptr, 0, obj[i].rect.top - message.sender->GetHeight(), 0, 0);
+						message.sender->GetMessage(*messageToSomeone);
+					}
+					if (message.dy < 0)
+					{
+						messageToSomeone = new Message(JUMP_C, 0, nullptr, 0, obj[i].rect.top + obj[i].rect.height, 0, 0);
+						message.sender->GetMessage(*messageToSomeone);
+					}
+					if (message.dx > 0)
+					{
+						messageToSomeone = new Message(CHANGE_X, 0, nullptr, obj[i].rect.left - message.sender->GetWidth(), 0, 0, 0);
+						message.sender->GetMessage(*messageToSomeone);
+					}
+					if (message.dx < 0)
+					{
+						messageToSomeone = new Message(CHANGE_X, 0, nullptr, obj[i].rect.left + obj[i].rect.width, 0, 0, 0);
+						message.sender->GetMessage(*messageToSomeone);
+					}
+				}
+
+				if (obj[i].name == "enemyBarier" && typeid(*(message.sender)) == typeid(Enemy))
+				{
+					messageToEnemy = new Message(ENEMY_BARIER, 0, nullptr);
+					message.sender->GetMessage(*messageToEnemy);
+				}
+			}
+		}
+	}
+
+	// Игрок
+	if (typeid(*(message.sender)) == typeid(Player))
+	{
+		if (message.code == HIT_C)
+		{
+			for (int i = 0; i < enemies.size(); i++)
+			{
+				Enemy* enemy = &enemies[i];
+				if (player->getHitRect().intersects(enemy->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() == HIT && enemy->GetState() != HIT && ((player->GetDirection() == LEFT && player->GetX() > enemy->GetX()) || (player->GetDirection() == RIGHT && player->GetX() < enemy->GetX())))
+				{
+					messageToEnemy = new Message(DAMAGE_C, player->GetStrength(), nullptr);
+					enemy->GetMessage(*messageToEnemy);
+					return;
+				}
+				else if (enemy->collisionWithPlayer && player->GetState() != HIT && player->GetDY() == 0 && enemy->GetState() == DAMAGE)
+				{
+					messageToEnemy = new Message(RUN_C, 0, nullptr);
+					enemy->GetMessage(*messageToEnemy);
+					return;
+				}
+			}
+		}
+	}
+
+	// Враг
+	if (typeid(*(message.sender)) == typeid(Enemy))
+	{
+		Enemy* enemy = (Enemy*)message.sender;
+		if (message.code == RUN_C)
+		{
+			if (enemy->getRect().intersects(player->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
+			{
+				messageToEnemy = new Message(HIT_C, 0, nullptr);
+				messageToPlayer = new Message(DAMAGE_C, enemy->GetStrength(), nullptr);
+				enemy->GetMessage(*messageToEnemy);
+				player->GetMessage(*messageToPlayer);
+				return;
+			}
+			else if (enemy->collisionWithPlayer && enemy->GetState() == RUN && player->GetDY() == 0)
+			{
+				if (!enemy->getRect().intersects(player->getRect()))
+				{
+					messageToEnemy = new Message(RUN_C, 0, nullptr);
+					enemy->GetMessage(*messageToEnemy);
+					/*enemy->collisionWithPlayer = false;*/
+				}
+				if (enemy->collisionWithPlayer && player->GetState() != RUN && player->GetState() != HIT)
+				{
+					messageToPlayer = new Message(IDLE_C, 0, nullptr);
+					player->GetMessage(*messageToPlayer);
+					/*player->SetState(IDLE);*/
+				}
+				return;
+			}
+
+		}
+	}
 }
 
 void Level::FillEnemy(std::string nameOfEnemy)

@@ -16,6 +16,7 @@
 #include "Entity.h"
 #include <typeinfo>
 #include "gamefwd.h"
+#include "Message.h"
 
 struct Object
 {
@@ -73,10 +74,10 @@ public:
 	sf::Vector2i GetTileSize();//получаем размер тайла
 	int GetWidth();
 	int GetHeight();
-	void CheckCollision(double dx, double dy, Entity* entity);
 	bool GetCollisionWithPlayer();
 	void ViewOnPlayer(Player* player);
 	void FillEnemy(std::string nameOfEnemy);
+	void GetMessage(Message& message);
 };
 #endif
 ///////////////////////////////////////

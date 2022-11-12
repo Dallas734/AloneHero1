@@ -32,6 +32,7 @@ class Player : public Entity
 		void StrengthUP();
 		void SpeedUp(double improveUnits);
 		void Update(float time, RenderWindow& window, Level* level) override;
+		void GetMessage(Message& message) override;
 	private:
 		States Jump(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level);
 		States Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level) override;

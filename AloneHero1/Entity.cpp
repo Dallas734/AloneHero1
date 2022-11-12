@@ -74,7 +74,7 @@ States Entity::Death(float time, double xBeginSprite, double yBeginSprite, doubl
 	return DEATH;
 }
 
-States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double damage, Directions direction, RenderWindow& window, Level* level)
+States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, double damage, Directions direction)
 {
 	SetSprite("Damage.png", DAMAGE, xBeginSprite, yBeginSprite, width, height);
 	currentFrame += time * 0.005;
@@ -108,6 +108,7 @@ States Entity::Damage(float time, double xBeginSprite, double yBeginSprite, doub
 
 States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)
 {
+	Message* message;
 
 	SetSprite("Run.png", RUN, xBeginSprite, yBeginSprite, width, height);
 	if (direction == RIGHT && onGround)
@@ -128,7 +129,9 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	sprites[RUN].setTextureRect(IntRect(xBeginSprite + (width + bufWidth) * int(currentFrame), yBeginSprite, width, height));
 	
 	this->x += dx * time;
-	level->CheckCollision(dx, 0, this);
+	message = new Message(RUN_C, 0 , this, this->x, this->y, this->dx, 0);
+	level->GetMessage(*message);
+	//level->CheckCollision(dx, 0, this);
 
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames)

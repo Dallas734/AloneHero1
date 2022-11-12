@@ -82,6 +82,8 @@ void Player::SpeedUp(double improveUnits)
 
 void Player::Update(float time, RenderWindow& window, Level* level)
 {
+	Message* message;
+
 	std::cout << dy;
 
 	// Уровень земли и падение
@@ -93,7 +95,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	}
 	//dy += 0.0001 * time; // Раскоментировав, будет больше притяжение.
 	y += dy * time; 
-	level->CheckCollision(0, dy, this);
+	message = new Message(RUN_C, 0, this, this->x, this->y, 0, this->dy);
+	level->GetMessage(*message);
 
 	// Состояния
 	if (Keyboard::isKeyPressed(Keyboard::D))
@@ -109,7 +112,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			dx = speed;
 			x += dx * time;
-			level->CheckCollision(dx, 0, this);
+			message = new Message(RUN_C, 0, this, this->x, this->y, this->dx, 0);
+			level->GetMessage(*message);
 			sprites[JUMP].setOrigin({ 0, 0 });
 			sprites[JUMP].setScale(1, 1);
 			dx = 0;
@@ -129,7 +133,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		{
 			dx = -speed;
 			x += dx * time;
-			level->CheckCollision(dx, 0, this);
+			message = new Message(RUN_C, 0, this, this->x, this->y, this->dx, 0);
+			level->GetMessage(*message);
 			sprites[JUMP].setOrigin({ sprites[JUMP].getLocalBounds().width, 0 });
 			sprites[JUMP].setScale(-1, 1);
 			dx = 0;
@@ -141,7 +146,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		direction = RIGHT;
 		state = HIT;
 		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFrames[HIT], this->bufOfHit, direction, window, level);
-		level->CheckCollision(dx, 0, this);
+		message = new Message(HIT_C, 0, this, this->x, this->y, this->dx, 0);
+		level->GetMessage(*message);
 		level->ViewOnPlayer(this);
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Left) && onGround)
@@ -149,7 +155,8 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 		direction = LEFT;
 		state = HIT;
 		Hit(time, xBeginSprite, yBeginSprite, widthOfHit, this->height, countFrames[HIT], this->bufOfHit, direction, window, level);
-		level->CheckCollision(dx, 0, this);
+		message = new Message(HIT_C, 0, this, this->x, this->y, this->dx, 0);
+		level->GetMessage(*message);
 		level->ViewOnPlayer(this);
 	}
 	else if (state == IDLE)
@@ -168,7 +175,7 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (state == DAMAGE)
 	{
 		state = DAMAGE;
-		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[DAMAGE], this->damage, direction, window, level);
+		Damage(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[DAMAGE], this->damage, direction);
 		level->ViewOnPlayer(this);
 	}
 
@@ -182,6 +189,34 @@ void Player::Update(float time, RenderWindow& window, Level* level)
 	if (this->health <= 0)
 	{
 		Death(time, xBeginSprite, yBeginSprite, this->width, this->height, countFrames[DEATH], direction, window, level);
+	}
+}
+
+void Player::GetMessage(Message& message)
+{
+	if (message.code == DAMAGE_C)
+	{
+		state = DAMAGE;
+		damage = message.units;
+	}
+	else if (message.code == IDLE_C)
+	{
+		state = IDLE;
+	}
+	else if (message.code == FALL_C)
+	{
+		this->y = message.y;
+		this->dy = message.dy;
+		state = IDLE;
+		onGround = true;
+	}
+	else if (message.code == JUMP_C)
+	{
+		this->y = message.y;
+	}
+	else if (message.code == CHANGE_X)
+	{
+		this->x = message.x;
 	}
 }
 

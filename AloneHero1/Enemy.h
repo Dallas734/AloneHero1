@@ -14,6 +14,7 @@ class Enemy : public Entity
 		};
 		~Enemy() {};
 		void Update(float time, RenderWindow& window, Level* level) override;
+		void GetMessage(Message& message) override;
 	private:
 		States Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level) override;
 	
