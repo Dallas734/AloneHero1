@@ -1,6 +1,6 @@
 #include "RedPotion.h"
 
-void RedPotion::Improve(Player player)
-{
-	player.HelthUP(this->regenerationUnits);
-}
+//void RedPotion::Improve(Player& player)
+//{
+//
+//}

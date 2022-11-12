@@ -1,72 +1,45 @@
-﻿  Enemy.cpp
+﻿  Level.cpp
 C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Goblin.h(7,97): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Enemy.cpp(112,115): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(96,18): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(97,24): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(141,41): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(141,26): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(202,27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(202,24): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(223,22): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(224,23): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(225,25): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(226,24): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(48,16): warning C4101: image: неиспользованная локальная переменная
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(332,51): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Enemy.cpp(112,108): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(332,31): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Enemy.cpp(112,94): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Enemy.cpp(112,52): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Enemy.cpp(113,31): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Enemy.cpp(113,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-  Player.cpp
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Goblin.h(7,97): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(31,115): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(31,108): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(31,94): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(31,52): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(32,41): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(32,32): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(67,115): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(67,108): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(67,94): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(67,52): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(68,31): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Player.cpp(68,28): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-  Создание кода...
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(358,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(358,17): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(429,64): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(452,63): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\Alexandr\source\repos\AloneHero1\AloneHero1\Level.cpp(287): warning C4715: Level::GetObject: значение возвращается не при всех путях выполнения
   AloneHero1.vcxproj -> C:\Users\Alexandr\source\repos\AloneHero1\x64\Debug\AloneHero1.exe

@@ -18,11 +18,6 @@ class Goblin : public Enemy
 			this->countFrames[HIT] = 8;
 			this->countFrames[DAMAGE] = 4;
 			this->countFrames[DEATH] = 4;
-			/*this->countFramesOfMove = 8;
-			this->countFramesOfIdle = 4;
-			this->countFramesOfHit = 8;
-			this->countFramesOfDamage = 4;
-			this->countFramesOfDeath = 4;*/
 			this->bufOfHit = 72;
 			this->heightOfHit = 53;
 			this->xBeginSpriteHit = 55;

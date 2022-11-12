@@ -17,6 +17,9 @@
 #include <typeinfo>
 #include "gamefwd.h"
 #include "Message.h"
+#include "SupportItem.h"
+#include "RedPotion.h"
+#include "GreenPotion.h"
 
 struct Object
 {
@@ -45,6 +48,7 @@ class Level//главный класс - уровень
 private:
 	Player* player;
 	std::vector<Enemy> enemies;
+	std::vector<SupportItem> supportItems;
 	int width, height, tileWidth, tileHeight;//в tmx файле width height в начале,затем размер тайла
 	int firstTileID;//получаем айди первого тайла
 	std::string fileNameTMX;
@@ -77,6 +81,7 @@ public:
 	bool GetCollisionWithPlayer();
 	void ViewOnPlayer(Player* player);
 	void FillEnemy(std::string nameOfEnemy);
+	void FillSupportItem(std::string nameOfSupportItem);
 	void GetMessage(Message& message);
 };
 #endif

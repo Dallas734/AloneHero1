@@ -272,6 +272,9 @@ bool Level::LoadFromFile(std::string filename)//двоеточия-обращение к методам кл
 	FillEnemy("Goblin");
 	FillEnemy("Mushroom");
 
+	FillSupportItem("GreenPotion");
+	FillSupportItem("RedPotion");
+
 	return true;
 }
 
@@ -353,6 +356,18 @@ void Level::ViewOnPlayer(Player* player)
 	}
 
 	view.setCenter(tempX, tempY);
+}
+
+void Level::FillSupportItem(std::string nameOfSupportItem)
+{
+	std::vector<Object> supportObjects = GetObjects(nameOfSupportItem);
+	for (int i = 0; i < supportObjects.size(); i++)
+	{
+		SupportItem* supportItem = nullptr;
+		if (nameOfSupportItem == "GreenPotion") supportItem = new GreenPotion(supportObjects[i].rect.left, supportObjects[i].rect.top, 20);
+		else if (nameOfSupportItem == "RedPotion") supportItem = new RedPotion(supportObjects[i].rect.left, supportObjects[i].rect.top, 20);
+		this->supportItems.push_back(*supportItem);
+	}
 }
 
 void Level::GetMessage(Message& message)
@@ -492,6 +507,17 @@ void Level::Draw(sf::RenderWindow& window, float time, Game* game)
 		}
 		else it++;
 		//window.draw(enemies[i].GetSprite(enemies[i].GetState()));
+	}
+
+	// Проходимся по предметам поддержки
+	for (std::vector<SupportItem>::iterator it = supportItems.begin(); it != supportItems.end(); )
+	{
+		it->Update(time, window);
+		if (it->GetUsed())
+		{
+			it = supportItems.erase(it);
+		}
+		else it++;
 	}
 
 	// Отрисовка

@@ -1,14 +1,30 @@
 #include "SupportItem.h"
 
-SupportItem::SupportItem(double x, double y, double width, double height, int regenerationUnits, String fileName)
+void SupportItem::Update(float time, RenderWindow& window)
 {
-	this->x = x;
-	this->y = y;
-	this->width = width;
-	this->height = height;
-	this->regenerationUnits = regenerationUnits;
-	this->fileName = fileName;
-	this->image.loadFromFile("Images/SupportItems/" + fileName);
-	this->texture.loadFromImage(image);
-	this->sprite.setTextureRect(IntRect(x, y, width, height));
+	image.loadFromFile(fileName);
+	texture.loadFromImage(image);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(IntRect(xBeginSprite, yBeginSprite, width, height));
+
+	double beginY = y;
+
+	if (y <= beginY + 10 && up)
+	{
+		y += 0.0001 * time;
+	}
+	else up = false;
+
+	if (y >= beginY - 10 && up == false)
+	{
+		y += -0.0001 * time;
+	}
+	else up = true;
+
+	sprite.setPosition(this->x, this->y);
+}
+
+bool SupportItem::GetUsed()
+{
+	return this->used;;
 }

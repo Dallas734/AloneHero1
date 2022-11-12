@@ -131,7 +131,6 @@ States Entity::Move(float time, double xBeginSprite, double yBeginSprite, double
 	this->x += dx * time;
 	message = new Message(RUN_C, 0 , this, this->x, this->y, this->dx, 0);
 	level->GetMessage(*message);
-	//level->CheckCollision(dx, 0, this);
 
 	currentFrame += time * 0.005;
 	if (this->currentFrame > frames)
