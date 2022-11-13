@@ -56,6 +56,7 @@ void Enemy::GetMessage(Message& message)
 	{
 		collisionWithPlayer = true;
 		state = HIT;
+		// AditionalFeatures() с отправкой сообщения игроку
 	}
 	else if (message.code == FALL_C)
 	{
@@ -77,6 +78,10 @@ void Enemy::GetMessage(Message& message)
 		if (direction == RIGHT) direction = LEFT;
 		else direction = RIGHT;
 	}
+}
+
+void Enemy::AdditionalFeatures()
+{
 }
 
 States Enemy::Fall(float time, double xBeginSprite, double yBeginSprite, double width, double height, int frames, Directions direction, RenderWindow& window, Level* level)

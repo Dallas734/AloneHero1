@@ -363,10 +363,10 @@ void Level::FillSupportItem(std::string nameOfSupportItem)
 	std::vector<Object> supportObjects = GetObjects(nameOfSupportItem);
 	for (int i = 0; i < supportObjects.size(); i++)
 	{
-		SupportItem* supportItem = nullptr;
-		if (nameOfSupportItem == "GreenPotion") supportItem = new GreenPotion(supportObjects[i].rect.left, supportObjects[i].rect.top, 20);
+		SupportItem* supportItem;
+		if (nameOfSupportItem == "GreenPotion") supportItem = new GreenPotion(supportObjects[i].rect.left, supportObjects[i].rect.top, 0.1);
 		else if (nameOfSupportItem == "RedPotion") supportItem = new RedPotion(supportObjects[i].rect.left, supportObjects[i].rect.top, 20);
-		this->supportItems.push_back(*supportItem);
+		this->supportItems.push_back(supportItem);
 	}
 }
 
@@ -375,6 +375,7 @@ void Level::GetMessage(Message& message)
 	Message* messageToEnemy = nullptr;
 	Message* messageToPlayer = nullptr;
 	Message* messageToSomeone = nullptr;
+	Message* messageToItem = nullptr;
 	std::vector<Object> obj = this->GetAllObjects();
 
 	//	Общая проверка столкновения при хлдьбе
@@ -438,14 +439,33 @@ void Level::GetMessage(Message& message)
 				}
 			}
 		}
+
+		if (message.code == RUN_C)
+		{
+			for (int i = 0; i < supportItems.size(); i++)
+			{
+				SupportItem* supportItem = supportItems[i];
+				if (player->getRect().intersects(supportItems[i]->getRect()))
+				{
+					messageToItem = new Message(IMPROVE_STATS, 0, player);
+					supportItem->GetMessage(*messageToItem);
+				}
+			}
+		}
 	}
 
+	//std::cout << typeid(*(message.sender)).name();
 	// Враг
 	if (typeid(*(message.sender)) == typeid(Enemy))
 	{
 		Enemy* enemy = (Enemy*)message.sender;
 		if (message.code == RUN_C)
 		{
+			if (enemy->getRect().intersects(player->getRect()))
+			{
+				int a = 0;
+			}
+
 			if (enemy->getRect().intersects(player->getRect()) && enemy->collisionWithPlayer == false && player->GetDY() == 0 && player->GetState() != HIT)
 			{
 				messageToEnemy = new Message(HIT_C, 0, nullptr);
@@ -510,10 +530,10 @@ void Level::Draw(sf::RenderWindow& window, float time, Game* game)
 	}
 
 	// Проходимся по предметам поддержки
-	for (std::vector<SupportItem>::iterator it = supportItems.begin(); it != supportItems.end(); )
+	for (std::vector<SupportItem*>::iterator it = supportItems.begin(); it != supportItems.end(); )
 	{
-		it->Update(time, window);
-		if (it->GetUsed())
+		(*it)->Update(time, window);
+		if ((*it)->GetUsed())
 		{
 			it = supportItems.erase(it);
 		}
@@ -542,7 +562,7 @@ void Level::Draw(sf::RenderWindow& window, float time, Game* game)
 	// Рисуем предметы поддержки
 	for (int i = 0; i < supportItems.size(); i++)
 	{
-		window.draw(supportItems[i].GetSprite());
+		window.draw(supportItems[i]->GetSprite());
 	}
 
 	window.display();

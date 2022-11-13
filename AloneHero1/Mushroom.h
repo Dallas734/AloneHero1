@@ -24,5 +24,5 @@ class Mushroom : public Enemy
 			this->yBeginSpriteHit = 62;
 		};
 		~Mushroom() {};
-		void Grab();
+		void AdditionalFeatures() override;
 };

@@ -218,6 +218,14 @@ void Player::GetMessage(Message& message)
 	{
 		this->x = message.x;
 	}
+	else if (message.code == HEALTH_UP)
+	{
+		this->health += message.units;
+	}
+	else if (message.code == SPEED_UP)
+	{
+		this->speed += message.units;
+	}
 }
 
 

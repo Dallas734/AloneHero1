@@ -22,6 +22,11 @@ void SupportItem::Update(float time, RenderWindow& window)
 	sprite.setPosition(this->x, this->y);
 }
 
+void SupportItem::Improve(Entity& entity)
+{
+
+}
+
 bool SupportItem::GetUsed()
 {
 	return this->used;;
@@ -30,4 +35,17 @@ bool SupportItem::GetUsed()
 Sprite SupportItem::GetSprite()
 {
 	return this->sprite;
+}
+
+FloatRect SupportItem::getRect()
+{
+	return FloatRect(x, y, width, height);
+}
+
+void SupportItem::GetMessage(Message& message)
+{
+	if (message.code == IMPROVE_STATS)
+	{
+		this->Improve(*(message.sender));
+	}
 }

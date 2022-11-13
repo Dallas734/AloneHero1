@@ -48,7 +48,7 @@ class Level//главный класс - уровень
 private:
 	Player* player;
 	std::vector<Enemy> enemies;
-	std::vector<SupportItem> supportItems;
+	std::vector<SupportItem*> supportItems;
 	int width, height, tileWidth, tileHeight;//в tmx файле width height в начале,затем размер тайла
 	int firstTileID;//получаем айди первого тайла
 	std::string fileNameTMX;

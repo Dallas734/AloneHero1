@@ -12,6 +12,6 @@ class GreenPotion : public SupportItem
 			this->height = 22;
 		};
 		~GreenPotion() {};
-		//void Improve(Player& player) override;
+		void Improve(Entity& entity) override;
 };
 

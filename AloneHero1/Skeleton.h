@@ -24,6 +24,6 @@ class Skeleton : public Enemy
 			this->yBeginSpriteHit = 42;
 		};
 		~Skeleton() {};
-		void Defense();
+		void AdditionalFeatures() override;
 };
 

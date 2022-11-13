@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Player.h"
+#include "Entity.h"
+#include "Message.h"
 
 using namespace sf;
 
@@ -33,9 +34,10 @@ public:
 	};
 	~SupportItem() {};
 	void Update(float time, RenderWindow& window);
-	//virtual void Improve(Player& player);
+	virtual void Improve(Entity& entity) = 0;
 	bool GetUsed();
 	Sprite GetSprite();
-
+	FloatRect getRect();
+	void GetMessage(Message& message);
 };
 

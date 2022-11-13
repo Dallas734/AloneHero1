@@ -11,7 +11,7 @@ class RedPotion : public SupportItem
 			this->width = 20;
 			this->height = 22;
 		};
-		//void Improve(Player& player) override;
+		void Improve(Entity& entity) override;
 		~RedPotion() {};
 };
 

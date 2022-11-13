@@ -24,6 +24,6 @@ class Goblin : public Enemy
 			this->yBeginSpriteHit = 52;
 		};
 		~Goblin() {};
-		void Poision();
+		void AdditionalFeatures() override;
 };
 
